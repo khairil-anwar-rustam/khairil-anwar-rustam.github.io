@@ -1,1 +1,0 @@
-# khairil-anwar-rustam.github.io
