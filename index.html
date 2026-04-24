@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Khairil Anwar | Tech Problem Solver</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+--bg:#0b1220;
+--card:rgba(255,255,255,0.05);
+--accent:#38bdf8;
+--text:#e5e7eb;
+--muted:#94a3b8;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif;}
+body{background:var(--bg);color:var(--text);}
+
+/* NAV */
+nav{
+position:fixed;top:0;width:100%;
+display:flex;justify-content:space-between;
+padding:12px 20px;
+background:rgba(0,0,0,0.4);
+backdrop-filter:blur(12px);
+z-index:100;
+}
+nav a{color:var(--muted);margin-left:15px;text-decoration:none;font-size:13px;}
+nav a:hover{color:var(--accent);}
+
+/* HERO */
+.hero{
+text-align:center;
+padding:120px 20px 40px;
+}
+.hero img{
+width:120px;height:120px;border-radius:50%;
+border:2px solid var(--accent);
+object-fit:cover;
+}
+.hero h1{font-size:28px;margin-top:10px;}
+.hero p{color:var(--muted);}
+
+/* SECTION */
+.section{
+max-width:1000px;
+margin:auto;
+padding:50px 20px;
+}
+.section h2{
+border-left:4px solid var(--accent);
+padding-left:10px;
+margin-bottom:20px;
+}
+
+/* CARD */
+.card{
+background:var(--card);
+padding:16px;
+border-radius:12px;
+border:1px solid rgba(255,255,255,0.08);
+margin-bottom:12px;
+cursor:pointer;
+}
+
+/* MODAL */
+.modal{
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+background:rgba(0,0,0,0.95);
+display:none;
+justify-content:center;
+align-items:flex-start;
+padding:30px 15px;
+z-index:999;
+overflow:auto;
+}
+
+.modal-content{
+max-width:900px;
+width:100%;
+background:#0b1220;
+padding:20px;
+border-radius:12px;
+position:relative;
+}
+
+.close{
+position:absolute;
+top:10px;right:15px;
+cursor:pointer;
+font-size:20px;
+}
+
+/* FULL SCREEN REPORT MODE */
+.fullscreen{
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+background:#0b1220;
+z-index:2000;
+display:none;
+overflow:auto;
+padding:20px;
+}
+
+.report-box{
+max-width:900px;
+margin:auto;
+background:rgba(255,255,255,0.04);
+padding:20px;
+border-radius:12px;
+border:1px solid rgba(255,255,255,0.08);
+}
+
+/* BEFORE AFTER */
+.ba-container{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+margin-top:10px;
+}
+
+.ba-box{
+background:rgba(255,255,255,0.04);
+padding:10px;
+border-radius:10px;
+}
+
+.ba-box h5{
+color:var(--accent);
+font-size:12px;
+margin-bottom:5px;
+}
+
+.ba-box img{
+width:100%;
+border-radius:8px;
+cursor:pointer;
+}
+
+/* ZOOM */
+.zoom{
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+background:rgba(0,0,0,0.95);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:3000;
+}
+.zoom img{max-width:90%;max-height:90%;}
+
+/* BUTTONS */
+button{
+background:rgba(255,255,255,0.08);
+border:1px solid rgba(255,255,255,0.1);
+color:white;
+padding:8px 12px;
+border-radius:8px;
+cursor:pointer;
+}
+button:hover{border-color:var(--accent);}
+
+/* WHATSAPP */
+.whatsapp{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25D366;
+color:white;
+padding:12px 14px;
+border-radius:50px;
+text-decoration:none;
+z-index:1000;
+}
+
+@media(max-width:600px){
+.ba-container{grid-template-columns:1fr;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav>
+<div>Khairil Anwar</div>
+<div>
+<a href="#it">IT</a>
+<a href="#diy">DIY</a>
+</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+<img src="images/profile.jpg">
+<h1>Tech Problem Solver</h1>
+<p>Network • Hardware • Software • DIY Engineering</p>
+</section>
+
+<!-- IT -->
+<section id="it" class="section">
+<h2>IT Case Studies</h2>
+<div class="card" onclick="openCase(0)">Network Engineering</div>
+<div class="card" onclick="openCase(1)">Hardware Engineering</div>
+<div class="card" onclick="openCase(2)">Software / System</div>
+</section>
+
+<!-- DIY -->
+<section id="diy" class="section">
+<h2>DIY Engineering</h2>
+<div class="card" onclick="openCase(3)">DIY Projects</div>
+</section>
+
+<!-- MODAL (NORMAL VIEW) -->
+<div id="modal" class="modal">
+<div class="modal-content">
+<span class="close" onclick="closeModal()">✖</span>
+<div id="modal-body"></div>
+</div>
+</div>
+
+<!-- FULL SCREEN REPORT MODE -->
+<div id="report" class="fullscreen">
+<div class="report-box">
+<span class="close" onclick="closeReport()">✖</span>
+<div id="report-body"></div>
+</div>
+</div>
+
+<!-- ZOOM -->
+<div id="zoom" class="zoom" onclick="this.style.display='none'">
+<img id="zoom-img">
+</div>
+
+<!-- WHATSAPP -->
+<a class="whatsapp" target="_blank"
+href="https://wa.me/60134570863?text=Hi%20Khairil%20I%20viewed%20your%20portfolio">
+💬 WhatsApp
+</a>
+
+<script>
+
+let cases=[
+{
+title:"Network Engineering",
+items:[
+{
+name:"WiFi Issue",
+content:`<p>Problem: Weak signal</p><div class="ba-container"><div class="ba-box"><h5>Before</h5><img src="images/net_before1.jpg"></div><div class="ba-box"><h5>After</h5><img src="images/net_after1.jpg"></div></div>`
+}
+]
+},
+{
+title:"Hardware Engineering",
+items:[
+{
+name:"Motherboard Issue",
+content:`<p>Problem: No boot</p><div class="ba-container"><div class="ba-box"><h5>Before</h5><img src="images/hw_before1.jpg"></div><div class="ba-box"><h5>After</h5><img src="images/hw_after1.jpg"></div></div>`
+}
+]
+},
+{
+title:"Software / System",
+items:[
+{
+name:"Performance Issue",
+content:`<p>Problem: Slow system</p><div class="ba-container"><div class="ba-box"><h5>Before</h5><img src="images/sys_before1.jpg"></div><div class="ba-box"><h5>After</h5><img src="images/sys_after1.jpg"></div></div>`
+}
+]
+},
+{
+title:"DIY Engineering",
+items:[
+{
+name:"Irrigation System",
+content:`<p>Problem: Manual watering</p><div class="ba-container"><div class="ba-box"><h5>Before</h5><img src="images/diy_before1.jpg"></div><div class="ba-box"><h5>After</h5><img src="images/diy_after1.jpg"></div></div>`
+}
+]
+}
+];
+
+let main=0;
+let index=0;
+
+function openCase(i){
+main=i;
+index=0;
+showCase();
+document.getElementById('modal').style.display='flex';
+}
+
+function showCase(){
+let c=cases[main];
+let item=c.items[index];
+
+document.getElementById('modal-body').innerHTML=`
+<h2>${c.title}</h2>
+<h3 style="color:#38bdf8">${item.name}</h3>
+${item.content}
+
+<br><br>
+<button onclick="prev()">⬅ Prev</button>
+<button onclick="next()">Next ➡</button>
+<button onclick="openReport()">📄 Full Report</button>
+`;
+}
+
+function next(){
+let c=cases[main];
+index=(index+1)%c.items.length;
+showCase();
+}
+
+function prev(){
+let c=cases[main];
+index=(index-1+c.items.length)%c.items.length;
+showCase();
+}
+
+function openReport(){
+let c=cases[main];
+let item=c.items[index];
+
+document.getElementById('report-body').innerHTML=`
+<h1>${c.title}</h1>
+<h2>${item.name}</h2>
+<hr>
+${item.content}
+`;
+
+document.getElementById('report').style.display='block';
+}
+
+function closeModal(){
+document.getElementById('modal').style.display='none';
+}
+
+function closeReport(){
+document.getElementById('report').style.display='none';
+}
+
+function zoom(img){
+document.getElementById('zoom-img').src=img.src;
+document.getElementById('zoom').style.display='flex';
+}
+
+</script>
+
+</body>
+</html>
