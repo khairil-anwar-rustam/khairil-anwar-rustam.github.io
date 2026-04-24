@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Khairil Anwar | Tech Problem Solver</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+--bg:#0b1220;
+--card:rgba(255,255,255,0.05);
+--accent:#38bdf8;
+--text:#e5e7eb;
+--muted:#94a3b8;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif;}
+body{background:var(--bg);color:var(--text);}
+
+/* NAV */
+nav{
+position:fixed;top:0;width:100%;
+display:flex;justify-content:space-between;
+padding:12px 20px;
+background:rgba(0,0,0,0.4);
+backdrop-filter:blur(12px);
+z-index:100;
+}
+nav a{color:var(--muted);margin-left:15px;text-decoration:none;font-size:13px;}
+nav a:hover{color:var(--accent);}
+
+/* HERO */
+.hero{text-align:center;padding:120px 20px 40px;}
+.hero img{width:120px;height:120px;border-radius:50%;border:2px solid var(--accent);}
+.hero h1{font-size:28px;margin-top:10px;}
+.hero p{color:var(--muted);}
+
+/* SECTION */
+.section{max-width:1000px;margin:auto;padding:50px 20px;}
+.section h2{border-left:4px solid var(--accent);padding-left:10px;margin-bottom:20px;}
+
+/* CARD */
+.card{
+background:var(--card);
+padding:16px;
+border-radius:12px;
+border:1px solid rgba(255,255,255,0.08);
+margin-bottom:12px;
+cursor:pointer;
+}
+
+/* MODAL */
+.modal{
+position:fixed;
+top:0;left:0;width:100%;height:100%;
+background:rgba(0,0,0,0.95);
+display:none;
+justify-content:center;
+align-items:flex-start;
+padding:30px 15px;
+z-index:999;
+overflow:auto;
+}
+.modal-content{
+max-width:900px;
+width:100%;
+background:#0b1220;
+padding:20px;
+border-radius:12px;
+position:relative;
+}
+.close{
+position:absolute;
+top:10px;right:15px;
+cursor:pointer;
+font-size:20px;
+}
+
+/* REPORT */
+.fullscreen{
+position:fixed;
+top:0;left:0;width:100%;height:100%;
+background:#0b1220;
+z-index:2000;
+display:none;
+overflow:auto;
+padding:20px;
+}
+.report-box{
+max-width:900px;
+margin:auto;
+background:rgba(255,255,255,0.04);
+padding:20px;
+border-radius:12px;
+}
+
+/* BUTTON */
+button{
+background:rgba(255,255,255,0.08);
+border:1px solid rgba(255,255,255,0.1);
+color:white;
+padding:8px 12px;
+border-radius:8px;
+cursor:pointer;
+}
+button:hover{border-color:var(--accent);}
+
+/* WHATSAPP */
+.whatsapp{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25D366;
+color:white;
+padding:12px 14px;
+border-radius:50px;
+text-decoration:none;
+}
+
+/* NEW: CERT + GALLERY */
+.gallery{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+margin-top:10px;
+}
+.gallery img{
+width:100%;
+border-radius:10px;
+border:1px solid rgba(255,255,255,0.1);
+}
+.cert-card{
+margin-top:40px;
+padding:15px;
+background:rgba(255,255,255,0.05);
+border-radius:12px;
+cursor:pointer;
+}
+
+iframe{
+width:100%;
+height:80vh;
+border:none;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<div>Khairil Anwar</div>
+<div>
+<a href="#it">IT</a>
+<a href="#diy">DIY</a>
+<a href="#cert">Certificates</a>
+</div>
+</nav>
+
+<section class="hero">
+<img src="images/profile.jpg">
+<h1>Tech Problem Solver</h1>
+<p>Network • Hardware • Software • DIY Engineering</p>
+</section>
+
+<section id="it" class="section">
+<h2>IT Case Studies</h2>
+<div class="card" onclick="openCase(0)">Network Engineering</div>
+<div class="card" onclick="openCase(1)">Hardware Engineering</div>
+<div class="card" onclick="openCase(2)">Software / System</div>
+</section>
+
+<section id="diy" class="section">
+<h2>DIY Engineering</h2>
+<div class="card" onclick="openCase(3)">DIY Projects</div>
+</section>
+
+<!-- CERTIFICATES -->
+<section id="cert" class="section">
+<h2>Certificates</h2>
+
+<div class="cert-card" onclick="openPDF('cert1.pdf')">
+Network Engineering Certificate
+</div>
+
+<div class="cert-card" onclick="openPDF('cert2.pdf')">
+Hardware Engineering Certificate
+</div>
+
+<div class="cert-card" onclick="openPDF('cert3.pdf')">
+Software Engineering Certificate
+</div>
+
+</section>
+
+<!-- MODAL -->
+<div id="modal" class="modal">
+<div class="modal-content">
+<span class="close" onclick="closeModal()">✖</span>
+<div id="modal-body"></div>
+</div>
+</div>
+
+<!-- FULL REPORT -->
+<div id="report" class="fullscreen">
+<div class="report-box">
+<span class="close" onclick="closeReport()">✖</span>
+<div id="report-body"></div>
+</div>
+</div>
+
+<!-- PDF VIEWER -->
+<div id="pdfModal" class="modal">
+<div class="modal-content">
+<span class="close" onclick="closePDF()">✖</span>
+<iframe id="pdfFrame"></iframe>
+</div>
+</div>
+
+<a class="whatsapp" target="_blank"
+href="https://wa.me/60134570863">💬 WhatsApp</a>
+
+<script>
+
+/* ================= CASE DATA ================= */
+
+let cases = [
+
+{
+title:"Network Engineering",
+items:[
+{
+name:"WiFi Coverage Issue",
+problem:"Weak WiFi coverage in multiple campus zones",
+fix:"Access point repositioning and channel optimization",
+solution:"Stable full coverage achieved after RF tuning",
+steps:["Site survey","Identify dead zones","Reposition AP","Optimize channel","Test"],
+tools:"WiFi Analyzer",
+impact:"Coverage improved 85%",
+gallery:{
+before:["images/network_before1.jpg"],
+after:["images/network_after1.jpg"]
+}
+}
+]
+},
+
+{
+title:"Hardware Engineering",
+items:[
+{
+name:"Motherboard Failure",
+problem:"System not powering on",
+fix:"Faulty motherboard",
+solution:"Replacement fixed system",
+steps:["Check PSU","Test board","Replace","Test"],
+tools:"Multimeter",
+impact:"System restored",
+gallery:{
+before:["images/hw_before1.jpg"],
+after:["images/hw_after1.jpg"]
+}
+}
+]
+},
+
+{
+title:"Software / System Engineering",
+items:[
+{
+name:"System Slow Performance",
+problem:"Slow OS",
+fix:"Optimization applied",
+solution:"System improved",
+steps:["Remove bloatware","Clean cache","Optimize startup","Test"],
+tools:"Task Manager",
+impact:"60% faster",
+gallery:{
+before:["images/sw_before1.jpg"],
+after:["images/sw_after1.jpg"]
+}
+}
+]
+},
+
+{
+title:"DIY Engineering",
+items:[
+{
+name:"Smart Irrigation",
+problem:"Manual watering",
+fix:"Automation system",
+solution:"Auto irrigation",
+steps:["Install sensor","Connect relay","Program","Test"],
+tools:"Arduino",
+impact:"90% automation",
+gallery:{
+before:["images/diy_before1.jpg"],
+after:["images/diy_after1.jpg"]
+}
+}
+]
+}
+
+];
+
+/* ================= MODAL ================= */
+
+let main=0,index=0;
+
+function openCase(i){
+main=i;index=0;show();
+document.getElementById('modal').style.display='flex';
+}
+
+function show(){
+let c=cases[main];
+let item=c.items[index];
+
+let before = item.gallery?.before?.map(img=>`<img src="${img}">`).join('') || "";
+let after = item.gallery?.after?.map(img=>`<img src="${img}">`).join('') || "";
+
+document.getElementById('modal-body').innerHTML=`
+<h2>${c.title}</h2>
+<h3>${item.name}</h3>
+<hr>
+
+<h4>Problem</h4><p>${item.problem}</p>
+<h4>Fix</h4><p>${item.fix}</p>
+<h4>Solution</h4><p>${item.solution}</p>
+
+<h4>Before / After</h4>
+<div class="gallery">
+<div>${before}</div>
+<div>${after}</div>
+</div>
+
+<br>
+<button onclick="prev()">⬅ Prev</button>
+<button onclick="next()">Next ➡</button>
+<button onclick="openReport()">Full Report</button>
+`;
+}
+
+function next(){index=(index+1)%cases[main].items.length;show();}
+function prev(){index=(index-1+cases[main].items.length)%cases[main].items.length;show();}
+
+/* ================= REPORT ================= */
+
+function openReport(){
+let c=cases[main];
+let item=c.items[index];
+
+document.getElementById('report-body').innerHTML=`
+<h1>${c.title}</h1>
+<h2>${item.name}</h2>
+<hr><br>
+<h3>Step-by-Step</h3>
+<ol>${item.steps.map(s=>`<li>${s}</li>`).join('')}</ol>
+<h3>Tools</h3><p>${item.tools}</p>
+<h3>Impact</h3><p>${item.impact}</p>
+`;
+
+document.getElementById('report').style.display='block';
+}
+
+function closeModal(){document.getElementById('modal').style.display='none';}
+function closeReport(){document.getElementById('report').style.display='none';}
+
+/* ================= PDF ================= */
+
+function openPDF(file){
+document.getElementById('pdfFrame').src=file;
+document.getElementById('pdfModal').style.display='flex';
+}
+function closePDF(){
+document.getElementById('pdfModal').style.display='none';
+document.getElementById('pdfFrame').src="";
+}
+
+</script>
+
+</body>
+</html>
