@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Khairil Anwar | Tech Problem Solver</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+--bg:#0b1220;
+--card:rgba(255,255,255,0.05);
+--accent:#38bdf8;
+--text:#e5e7eb;
+--muted:#94a3b8;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif;}
+body{background:var(--bg);color:var(--text);}
+
+/* NAV */
+nav{
+position:fixed;top:0;width:100%;
+display:flex;justify-content:space-between;
+padding:12px 20px;
+background:rgba(0,0,0,0.4);
+backdrop-filter:blur(12px);
+z-index:100;
+}
+nav a{color:var(--muted);margin-left:15px;text-decoration:none;font-size:13px;}
+nav a:hover{color:var(--accent);}
+
+/* HERO */
+.hero{
+text-align:center;
+padding:120px 20px 40px;
+}
+.hero img{
+width:120px;height:120px;border-radius:50%;
+border:2px solid var(--accent);
+object-fit:cover;
+}
+.hero h1{font-size:28px;margin-top:10px;}
+.hero p{color:var(--muted);}
+
+/* SECTION */
+.section{
+max-width:1000px;
+margin:auto;
+padding:50px 20px;
+}
+.section h2{
+border-left:4px solid var(--accent);
+padding-left:10px;
+margin-bottom:20px;
+}
+
+/* CARD */
+.card{
+background:var(--card);
+padding:16px;
+border-radius:12px;
+border:1px solid rgba(255,255,255,0.08);
+margin-bottom:12px;
+cursor:pointer;
+}
+
+/* MODAL */
+.modal{
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+background:rgba(0,0,0,0.95);
+display:none;
+justify-content:center;
+align-items:flex-start;
+padding:30px 15px;
+z-index:999;
+overflow:auto;
+}
+
+.modal-content{
+max-width:900px;
+width:100%;
+background:#0b1220;
+padding:20px;
+border-radius:12px;
+position:relative;
+}
+
+.close{
+position:absolute;
+top:10px;right:15px;
+cursor:pointer;
+font-size:20px;
+}
+
+/* REPORT MODE */
+.fullscreen{
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+background:#0b1220;
+z-index:2000;
+display:none;
+overflow:auto;
+padding:20px;
+}
+
+.report-box{
+max-width:900px;
+margin:auto;
+background:rgba(255,255,255,0.04);
+padding:20px;
+border-radius:12px;
+}
+
+/* BEFORE AFTER */
+.ba-container{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+margin-top:10px;
+}
+
+.ba-box{
+background:rgba(255,255,255,0.04);
+padding:10px;
+border-radius:10px;
+}
+
+.ba-box h5{
+color:var(--accent);
+font-size:12px;
+margin-bottom:5px;
+}
+
+.ba-box img{
+width:100%;
+border-radius:8px;
+cursor:pointer;
+}
+
+/* BUTTONS */
+button{
+background:rgba(255,255,255,0.08);
+border:1px solid rgba(255,255,255,0.1);
+color:white;
+padding:8px 12px;
+border-radius:8px;
+cursor:pointer;
+}
+button:hover{border-color:var(--accent);}
+
+/* WHATSAPP */
+.whatsapp{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25D366;
+color:white;
+padding:12px 14px;
+border-radius:50px;
+text-decoration:none;
+z-index:1000;
+}
+
+@media(max-width:600px){
+.ba-container{grid-template-columns:1fr;}
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<div>Khairil Anwar</div>
+<div>
+<a href="#it">IT</a>
+<a href="#diy">DIY</a>
+</div>
+</nav>
+
+<section class="hero">
+<img src="images/profile.jpg">
+<h1>Tech Problem Solver</h1>
+<p>Network • Hardware • Software • DIY Engineering</p>
+</section>
+
+<!-- IT -->
+<section id="it" class="section">
+<h2>IT Case Studies</h2>
+<div class="card" onclick="openCase(0)">Network Engineering</div>
+<div class="card" onclick="openCase(1)">Hardware Engineering</div>
+<div class="card" onclick="openCase(2)">Software / System</div>
+</section>
+
+<!-- DIY -->
+<section id="diy" class="section">
+<h2>DIY Engineering</h2>
+<div class="card" onclick="openCase(3)">DIY Projects</div>
+</section>
+
+<!-- MODAL -->
+<div id="modal" class="modal">
+<div class="modal-content">
+<span class="close" onclick="closeModal()">✖</span>
+<div id="modal-body"></div>
+</div>
+</div>
+
+<!-- FULL REPORT -->
+<div id="report" class="fullscreen">
+<div class="report-box">
+<span class="close" onclick="closeReport()">✖</span>
+<div id="report-body"></div>
+</div>
+</div>
+
+<a class="whatsapp" target="_blank"
+href="https://wa.me/60134570863?text=Hi%20Khairil%20I%20viewed%20your%20portfolio">
+💬 WhatsApp
+</a>
+
+<script>
+
+/* ================= FULL CASE DATA ================= */
+
+let cases = [
+
+/* ================= NETWORK ================= */
+{
+title:"Network Engineering",
+items:[
+
+{
+name:"Case 1 - WiFi Coverage Issue",
+content:`
+<p><b>Problem:</b> Weak WiFi coverage in multiple zones</p>
+<p><b>Fix:</b> AP repositioning + channel optimization + load balancing</p>
+<p><b>Result:</b> Full stable campus-wide coverage achieved</p>
+
+<div class="ba-container">
+<div class="ba-box"><h5>Before</h5><img src="images/net_before1.jpg"></div>
+<div class="ba-box"><h5>After</h5><img src="images/net_after1.jpg"></div>
+</div>`
+},
+
+{
+name:"Case 2 - Network Downtime Recovery",
+content:`
+<p><b>Problem:</b> Sudden network outage affecting operations</p>
+<p><b>Fix:</b> Switch replacement + VLAN reconfiguration</p>
+<p><b>Result:</b> System restored with improved redundancy</p>
+
+<div class="ba-container">
+<div class="ba-box"><h5>Before</h5><img src="images/net_before2.jpg"></div>
+<div class="ba-box"><h5>After</h5><img src="images/net_after2.jpg"></div>
+</div>`
+},
+
+{
+name:"Case 3 - High Latency Issue",
+content:`
+<p><b>Problem:</b> Slow internet during peak hours</p>
+<p><b>Fix:</b> QoS setup + traffic segmentation</p>
+<p><b>Result:</b> Reduced latency and stable throughput</p>
+
+<div class="ba-container">
+<div class="ba-box"><h5>Before</h5><img src="images/net_before3.jpg"></div>
+<div class="ba-box"><h5>After</h5><img src="images/net_after3.jpg"></div>
+</div>`
+}
+
+]
+},
+
+/* ================= HARDWARE ================= */
+{
+title:"Hardware Engineering",
+items:[
+
+{
+name:"Case 1 - Motherboard Failure",
+content:`
+<p><b>Problem:</b> System not powering on</p>
+<p><b>Fix:</b> Component testing + PSU validation</p>
+<p><b>Result:</b> System fully restored</p>
+
+<div class="ba-container">
+<div class="ba-box"><h5>Before</h5><img src="images/hw_before1.jpg"></div>
+<div class="ba-box"><h5>After</h5><img src="images/hw_after1.jpg"></div>
+</div>`
+},
+
+{
+name:"Case 2 - Thermal Overheating",
+content:`
+<p><b>Problem:</b> System shutdown due to heat</p>
+<p><b>Fix:</b> Cooling system rebuild + airflow redesign</p>
+<p><b>Result:</b> Stable temperature under load</p>
+
+<div class="ba-container">
+<div class="ba-box"><h5>Before</h5><img src="images/hw_before2.jpg"></div>
+<div class="ba-box"><h5>After</h5><img src="images/hw_after2.jpg"></div>
+</div>`
+},
+
+{
+name:"Case 3 - RAM Instability",
+content:`
+<p><b>Problem:</b> Random crashes</p>
+<p><b>Fix:</b> RAM slot cleaning + replacement testing</p>
+<p><b>Result:</b> Stable system performance</p>
+
+<div class="ba-container">
+<div class="ba-box"><h5>Before</h5><img src="images/hw_before3.jpg"></div>
+<div class="ba-box"><h5>After</h5><img src="images/hw_after3.jpg"></div>
+</div>`
+}
+
+]
+},
+
+/* ================= SOFTWARE ================= */
+{
+title:"Software / System Engineering",
+items:[
+
+{
+name:"Case 1 - Slow System Performance",
+content:`
+<p><b>Problem:</b> Slow boot + lag</p>
+<p><b>Fix:</b> Startup optimization + cleanup</p>
+<p><b>Result:</b> Faster system response</p>
+
+<div class="ba-container">
+<div class="ba-box"><h5>Before</h5><img src="images/sys_before1.jpg"></div>
+<div class="ba-box"><h5>After</h5><img src="images/sys_after1.jpg"></div>
+</div>`
+},
+
+{
+name:"Case 2 - Software Crash",
+content:`
+<p><b>Problem:</b> App instability</p>
+<p><b>Fix:</b> Dependency repair + reinstall</p>
+<p><b>Result:</b> Stable software system</p>
+
+<div class="ba-container">
+<div class="ba-box"><h5>Before</h5><img src="images/sys_before2.jpg"></div>
+<div class="ba-box"><h5>After</h5><img src="images/sys_after2.jpg"></div>
+</div>`
+},
+
+{
+name:"Case 3 - OS Update Failure",
+content:`
+<p><b>Problem:</b> Failed update</p>
+<p><b>Fix:</b> Manual patch recovery</p>
+<p><b>Result:</b> Stable updated OS</p>
+
+<div class="ba-container">
+<div class="ba-box"><h5>Before</h5><img src="images/sys_before3.jpg"></div>
+<div class="ba-box"><h5>After</h5><img src="images/sys_after3.jpg"></div>
+</div>`
+}
+
+]
+},
+
+/* ================= DIY ================= */
+{
+title:"DIY Engineering",
+items:[
+
+{
+name:"Case 1 - Smart Irrigation",
+content:`
+<p><b>Problem:</b> Manual watering inconsistency</p>
+<p><b>Fix:</b> Sensor-based automation system</p>
+<p><b>Result:</b> Fully automated irrigation</p>
+
+<div class="ba-container">
+<div class="ba-box"><h5>Before</h5><img src="images/diy_before1.jpg"></div>
+<div class="ba-box"><h5>After</h5><img src="images/diy_after1.jpg"></div>
+</div>`
+},
+
+{
+name:"Case 2 - Smart Lighting",
+content:`
+<p><b>Problem:</b> Energy wastage</p>
+<p><b>Fix:</b> Light sensor automation</p>
+<p><b>Result:</b> Auto ON/OFF system</p>
+
+<div class="ba-container">
+<div class="ba-box"><h5>Before</h5><img src="images/light_before.jpg"></div>
+<div class="ba-box"><h5>After</h5><img src="images/light_after.jpg"></div>
+</div>`
+},
+
+{
+name:"Case 3 - DIY Workbench System",
+content:`
+<p><b>Problem:</b> Disorganized workspace</p>
+<p><b>Fix:</b> Structured engineering setup</p>
+<p><b>Result:</b> Faster troubleshooting workflow</p>
+
+<div class="ba-container">
+<div class="ba-box"><h5>Before</h5><img src="images/work_before.jpg"></div>
+<div class="ba-box"><h5>After</h5><img src="images/work_after.jpg"></div>
+</div>`
+}
+
+]
+}
+];
+
+/* ================= SYSTEM ================= */
+
+let main=0;
+let index=0;
+
+function openCase(i){
+main=i;
+index=0;
+show();
+document.getElementById('modal').style.display='flex';
+}
+
+function show(){
+let c=cases[main];
+let item=c.items[index];
+
+document.getElementById('modal-body').innerHTML=`
+<h2>${c.title}</h2>
+<h3 style="color:#38bdf8">${item.name}</h3>
+${item.content}
+
+<br><br>
+<button onclick="prev()">⬅ Prev</button>
+<button onclick="next()">Next ➡</button>
+<button onclick="openReport()">📄 Full Report</button>
+`;
+}
+
+function next(){
+let c=cases[main];
+index=(index+1)%c.items.length;
+show();
+}
+
+function prev(){
+let c=cases[main];
+index=(index-1+c.items.length)%c.items.length;
+show();
+}
+
+function openReport(){
+let c=cases[main];
+let item=c.items[index];
+
+document.getElementById('report-body').innerHTML=`
+<h1>${c.title}</h1>
+<h2>${item.name}</h2>
+<hr>
+${item.content}
+`;
+
+document.getElementById('report').style.display='block';
+}
+
+function closeModal(){
+document.getElementById('modal').style.display='none';
+}
+
+function closeReport(){
+document.getElementById('report').style.display='none';
+}
+
+</script>
+
+</body>
+  </html>
