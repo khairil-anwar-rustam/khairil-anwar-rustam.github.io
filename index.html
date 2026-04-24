@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Khairil Anwar | Tech Problem Solver</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+--bg:#0b1220;
+--card:rgba(255,255,255,0.05);
+--accent:#38bdf8;
+--text:#e5e7eb;
+--muted:#94a3b8;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif;}
+body{background:var(--bg);color:var(--text);}
+
+/* NAV */
+nav{
+position:fixed;top:0;width:100%;
+display:flex;justify-content:space-between;
+padding:12px 20px;
+background:rgba(0,0,0,0.4);
+backdrop-filter:blur(12px);
+z-index:100;
+}
+nav a{color:var(--muted);margin-left:15px;text-decoration:none;font-size:13px;}
+nav a:hover{color:var(--accent);}
+
+/* HERO */
+.hero{text-align:center;padding:120px 20px 40px;}
+.hero img{width:120px;height:120px;border-radius:50%;border:2px solid var(--accent);}
+.hero h1{font-size:28px;margin-top:10px;}
+.hero p{color:var(--muted);}
+
+/* SECTION */
+.section{max-width:1000px;margin:auto;padding:50px 20px;}
+.section h2{border-left:4px solid var(--accent);padding-left:10px;margin-bottom:20px;}
+
+/* CARD */
+.card{
+background:var(--card);
+padding:16px;
+border-radius:12px;
+border:1px solid rgba(255,255,255,0.08);
+margin-bottom:12px;
+cursor:pointer;
+}
+
+/* MODAL */
+.modal{
+position:fixed;
+top:0;left:0;width:100%;height:100%;
+background:rgba(0,0,0,0.95);
+display:none;
+justify-content:center;
+align-items:flex-start;
+padding:30px 15px;
+z-index:999;
+overflow:auto;
+}
+.modal-content{
+max-width:900px;
+width:100%;
+background:#0b1220;
+padding:20px;
+border-radius:12px;
+position:relative;
+}
+.close{
+position:absolute;
+top:10px;right:15px;
+cursor:pointer;
+font-size:20px;
+}
+
+/* REPORT */
+.fullscreen{
+position:fixed;
+top:0;left:0;width:100%;height:100%;
+background:#0b1220;
+z-index:2000;
+display:none;
+overflow:auto;
+padding:20px;
+}
+.report-box{
+max-width:900px;
+margin:auto;
+background:rgba(255,255,255,0.04);
+padding:20px;
+border-radius:12px;
+}
+
+/* SLIDER */
+.ba-slider{
+position:relative;
+width:100%;
+overflow:hidden;
+border-radius:10px;
+margin-top:10px;
+}
+.ba-slider img{width:100%;display:block;}
+.ba-overlay{position:absolute;top:0;left:0;width:50%;overflow:hidden;}
+.ba-handle{position:absolute;top:0;left:50%;width:3px;height:100%;background:#38bdf8;cursor:ew-resize;}
+
+/* BUTTON */
+button{
+background:rgba(255,255,255,0.08);
+border:1px solid rgba(255,255,255,0.1);
+color:white;
+padding:8px 12px;
+border-radius:8px;
+cursor:pointer;
+}
+button:hover{border-color:var(--accent);}
+
+/* WHATSAPP */
+.whatsapp{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25D366;
+color:white;
+padding:12px 14px;
+border-radius:50px;
+text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<div>Khairil Anwar</div>
+<div>
+<a href="#it">IT</a>
+<a href="#diy">DIY</a>
+</div>
+</nav>
+
+<section class="hero">
+<img src="images/profile.jpg">
+<h1>Tech Problem Solver</h1>
+<p>Network • Hardware • Software • DIY Engineering</p>
+</section>
+
+<!-- ================= IT ================= -->
+<section id="it" class="section">
+<h2>IT Case Studies</h2>
+<div class="card" onclick="openCase(0)">Network Engineering</div>
+<div class="card" onclick="openCase(1)">Hardware Engineering</div>
+<div class="card" onclick="openCase(2)">Software / System</div>
+</section>
+
+<!-- ================= DIY ================= -->
+<section id="diy" class="section">
+<h2>DIY Engineering</h2>
+<div class="card" onclick="openCase(3)">DIY Projects</div>
+</section>
+
+<!-- MODAL -->
+<div id="modal" class="modal">
+<div class="modal-content">
+<span class="close" onclick="closeModal()">✖</span>
+<div id="modal-body"></div>
+</div>
+</div>
+
+<!-- REPORT -->
+<div id="report" class="fullscreen">
+<div class="report-box">
+<span class="close" onclick="closeReport()">✖</span>
+<div id="report-body"></div>
+</div>
+</div>
+
+<a class="whatsapp" target="_blank"
+href="https://wa.me/60134570863">💬 WhatsApp</a>
+
+<script>
+
+/* ================= FULL REAL CASE STRUCTURE ================= */
+
+let cases = [
+
+/* ================= NETWORK ================= */
+{
+title:"Network Engineering",
+items:[
+
+{
+name:"Case 1 - Campus WiFi Dead Zones",
+content:`<p><b>Problem:</b> Certain campus blocks had no WiFi signal or unstable connection.</p>
+<div class="ba-slider">
+<img src="images/net_after1.jpg">
+<div class="ba-overlay"><img src="images/net_before1.jpg"></div>
+<div class="ba-handle"></div>
+</div>`,
+steps:[
+"Site survey using WiFi analyzer",
+"Identify dead zones and interference sources",
+"Reposition access points",
+"Adjust channel frequency & power output",
+"Run load balancing test"
+],
+tools:"WiFi Analyzer, Router Controller, Network Switch",
+impact:"Coverage improved by 85%, complaints reduced drastically"
+},
+
+{
+name:"Case 2 - Network Downtime (Switch Failure)",
+content:`<p><b>Problem:</b> Core switch failure caused campus-wide downtime.</p>
+<div class="ba-slider">
+<img src="images/net_after2.jpg">
+<div class="ba-overlay"><img src="images/net_before2.jpg"></div>
+<div class="ba-handle"></div>
+</div>`,
+steps:[
+"Identify faulty switch via ping test",
+"Bypass using backup switch",
+"Replace hardware unit",
+"Reconfigure VLANs",
+"Restore services incrementally"
+],
+tools:"Cisco Switch, Network Tester, CLI tools",
+impact:"System restored within 45 minutes with zero data loss"
+}
+]
+},
+
+/* ================= HARDWARE ================= */
+{
+title:"Hardware Engineering",
+items:[
+
+{
+name:"Case 1 - Motherboard Power Failure",
+content:`<p><b>Problem:</b> PC not powering on in admin lab.</p>
+<div class="ba-slider">
+<img src="images/hw_after1.jpg">
+<div class="ba-overlay"><img src="images/hw_before1.jpg"></div>
+<div class="ba-handle"></div>
+</div>`,
+steps:[
+"Check PSU output voltage",
+"Test motherboard with minimal hardware setup",
+"Inspect capacitor damage",
+"Replace faulty motherboard",
+"Stress test system stability"
+],
+tools:"Multimeter, PSU tester",
+impact:"System fully restored, zero downtime recurrence"
+}
+]
+},
+
+/* ================= SOFTWARE ================= */
+{
+title:"Software / System Engineering",
+items:[
+
+{
+name:"Case 1 - System Performance Degradation",
+content:`<p><b>Problem:</b> Slow boot and application lag across lab PCs.</p>
+<div class="ba-slider">
+<img src="images/sys_after1.jpg">
+<div class="ba-overlay"><img src="images/sys_before1.jpg"></div>
+<div class="ba-handle"></div>
+</div>`,
+steps:[
+"Analyze startup programs",
+"Remove unnecessary services",
+"Clean system cache",
+"Optimize registry entries",
+"Apply performance tuning policies"
+],
+tools:"Task Manager, CCleaner, System Logs",
+impact:"Boot time reduced by 60%, smooth operations restored"
+}
+]
+},
+
+/* ================= DIY ================= */
+{
+title:"DIY Engineering",
+items:[
+
+{
+name:"Case 1 - Smart Irrigation System",
+content:`<p><b>Problem:</b> Manual watering inconsistent for garden maintenance.</p>
+<div class="ba-slider">
+<img src="images/diy_after1.jpg">
+<div class="ba-overlay"><img src="images/diy_before1.jpg"></div>
+<div class="ba-handle"></div>
+</div>`,
+steps:[
+"Install soil moisture sensor",
+"Connect relay to water pump",
+"Program threshold automation logic",
+"Test dry/wet cycle response",
+"Optimize watering schedule"
+],
+tools:"Arduino/Relay, Moisture Sensor, Pump System",
+impact:"Reduced manual workload by 90%"
+}
+]
+}
+
+];
+
+/* ================= SYSTEM ================= */
+
+let main=0,index=0;
+
+function openCase(i){
+main=i;index=0;show();
+document.getElementById('modal').style.display='flex';
+}
+
+function show(){
+let c=cases[main];
+let item=c.items[index];
+
+document.getElementById('modal-body').innerHTML=`
+<h2>${c.title}</h2>
+<h3>${item.name}</h3>
+${item.content}
+
+<h4>Steps</h4>
+<ul>${item.steps.map(s=>`<li>${s}</li>`).join('')}</ul>
+
+<p><b>Tools:</b> ${item.tools}</p>
+<p><b>Impact:</b> ${item.impact}</p>
+
+<br>
+<button onclick="prev()">⬅ Prev</button>
+<button onclick="next()">Next ➡</button>
+<button onclick="openReport()">Full Report</button>
+`;
+
+initSliders();
+}
+
+function next(){index=(index+1)%cases[main].items.length;show();}
+function prev(){index=(index-1+cases[main].items.length)%cases[main].items.length;show();}
+
+/* FULL REPORT */
+function openReport(){
+let c=cases[main];
+let item=c.items[index];
+
+document.getElementById('report-body').innerHTML=`
+<h1>${c.title}</h1>
+<h2>${item.name}</h2>
+<hr><br>
+
+<h3>Problem</h3>
+<div>${item.content}</div>
+
+<h3>Step-by-Step Fix</h3>
+<ol>${item.steps.map(s=>`<li>${s}</li>`).join('')}</ol>
+
+<h3>Tools Used</h3>
+<p>${item.tools}</p>
+
+<h3>Impact</h3>
+<p>${item.impact}</p>
+`;
+
+initSliders();
+document.getElementById('report').style.display='block';
+}
+
+function closeModal(){document.getElementById('modal').style.display='none';}
+function closeReport(){document.getElementById('report').style.display='none';}
+
+/* SLIDER */
+function initSliders(){
+document.querySelectorAll('.ba-slider').forEach(slider=>{
+let overlay=slider.querySelector('.ba-overlay');
+let handle=slider.querySelector('.ba-handle');
+
+slider.onmousemove=(e)=>{
+let rect=slider.getBoundingClientRect();
+let x=e.clientX-rect.left;
+let p=(x/rect.width)*100;
+overlay.style.width=p+'%';
+handle.style.left=p+'%';
+}
+});
+}
+
+</script>
+
+</body>
+</html>
