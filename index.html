@@ -20,13 +20,25 @@
 body{background:linear-gradient(135deg,#0b1220,#0f172a);color:var(--text);}
 
 /* NAV */
-nav{position:fixed;top:0;width:100%;display:flex;justify-content:space-between;padding:12px 20px;background:rgba(0,0,0,0.4);backdrop-filter:blur(12px);z-index:100;}
+nav{
+position:fixed;top:0;width:100%;
+display:flex;justify-content:space-between;
+padding:12px 20px;
+background:rgba(0,0,0,0.4);
+backdrop-filter:blur(12px);
+z-index:100;
+}
+
 nav a{color:var(--muted);margin-left:15px;text-decoration:none;font-size:13px;}
 nav a:hover{color:var(--accent);}
 
 /* HERO */
 .hero{text-align:center;padding:110px 20px 60px;}
-.hero img{width:120px;height:120px;border-radius:50%;border:2px solid var(--accent);object-fit:cover;margin-bottom:15px;}
+.hero img{
+width:120px;height:120px;border-radius:50%;
+border:2px solid var(--accent);
+object-fit:cover;margin-bottom:15px;
+}
 .hero h1{font-size:30px;}
 .hero p{color:var(--muted);}
 
@@ -59,12 +71,16 @@ padding:20px;border-radius:12px;
 position:relative;
 }
 
-.close{position:absolute;right:15px;top:10px;cursor:pointer;font-size:20px;}
+.close{
+position:absolute;right:15px;top:10px;
+cursor:pointer;font-size:20px;
+}
 
 /* SLIDER */
 .slider-nav{
 display:flex;justify-content:space-between;margin-top:15px;
 }
+
 .btn{
 background:var(--accent);
 color:#000;
@@ -75,18 +91,61 @@ font-size:13px;
 }
 
 /* GALLERY */
-.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-top:10px;}
-.gallery img{width:100%;border-radius:8px;cursor:pointer;}
+.gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+gap:10px;
+margin-top:10px;
+}
+
+.gallery img{
+width:100%;
+border-radius:8px;
+cursor:pointer;
+}
 
 /* IMAGE ZOOM */
 .zoom{
 position:fixed;top:0;left:0;width:100%;height:100%;
 background:rgba(0,0,0,0.95);
-display:none;justify-content:center;align-items:center;z-index:1000;
+display:none;
+justify-content:center;
+align-items:center;
+z-index:1000;
 }
-.zoom img{max-width:90%;max-height:90%;}
 
-footer{text-align:center;padding:30px;color:var(--muted);}
+.zoom img{
+max-width:90%;
+max-height:90%;
+}
+
+/* WHATSAPP BUTTON */
+.whatsapp{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25D366;
+color:#fff;
+padding:12px 14px;
+border-radius:50px;
+font-size:14px;
+text-decoration:none;
+box-shadow:0 4px 12px rgba(0,0,0,0.4);
+z-index:1000;
+display:flex;
+align-items:center;
+gap:8px;
+}
+
+.whatsapp:hover{
+background:#1ebe5d;
+}
+
+footer{
+text-align:center;
+padding:30px;
+color:var(--muted);
+}
 </style>
 </head>
 
@@ -109,17 +168,13 @@ footer{text-align:center;padding:30px;color:var(--muted);}
 
 <section id="it" class="section">
 <h2>IT Case Studies</h2>
-
 <div class="card" onclick="openCase(0)">Network Optimization</div>
 <div class="card" onclick="openCase(1)">Hardware Repair</div>
-
 </section>
 
 <section id="diy" class="section">
 <h2>DIY Projects</h2>
-
 <div class="card" onclick="openCase(2)">Smart Irrigation</div>
-
 </section>
 
 <section id="contact" class="section">
@@ -146,6 +201,12 @@ footer{text-align:center;padding:30px;color:var(--muted);}
 <img id="zoom-img">
 </div>
 
+<!-- WHATSAPP BUTTON -->
+<a href="https://wa.me/60134570863?text=Hi%20Khairil%2C%20I%20viewed%20your%20portfolio%20and%20would%20like%20to%20connect"
+class="whatsapp" target="_blank">
+💬 WhatsApp
+</a>
+
 <script>
 
 let cases = [
@@ -165,7 +226,7 @@ title:"Hardware Repair",
 content:`
 <p><b>Problem:</b> No power</p>
 <p><b>Action:</b> Board repair</p>
-<p><b>Result:</b> Restored</p>
+<p><b>Result:</b> Restored system</p>
 <div class="gallery">
 <img src="images/hw1.jpg" onclick="zoom(this)">
 </div>
