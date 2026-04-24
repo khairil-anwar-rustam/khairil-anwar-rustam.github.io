@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Khairil Anwar | Tech Problem Solver</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+--bg:#0b1220;
+--card:rgba(255,255,255,0.05);
+--accent:#38bdf8;
+--text:#e5e7eb;
+--muted:#94a3b8;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif;}
+body{background:var(--bg);color:var(--text);}
+
+/* NAV */
+nav{
+position:fixed;top:0;width:100%;
+display:flex;justify-content:space-between;
+padding:12px 20px;
+background:rgba(0,0,0,0.4);
+backdrop-filter:blur(12px);
+z-index:100;
+}
+nav a{color:var(--muted);margin-left:15px;text-decoration:none;font-size:13px;}
+nav a:hover{color:var(--accent);}
+
+/* HERO */
+.hero{text-align:center;padding:120px 20px 40px;}
+.hero img{width:120px;height:120px;border-radius:50%;border:2px solid var(--accent);}
+.hero h1{font-size:28px;margin-top:10px;}
+.hero p{color:var(--muted);}
+
+/* SECTION */
+.section{max-width:1000px;margin:auto;padding:50px 20px;}
+.section h2{border-left:4px solid var(--accent);padding-left:10px;margin-bottom:20px;}
+
+/* CARD */
+.card{
+background:var(--card);
+padding:16px;
+border-radius:12px;
+border:1px solid rgba(255,255,255,0.08);
+margin-bottom:12px;
+cursor:pointer;
+}
+
+/* MODAL */
+.modal{
+position:fixed;top:0;left:0;
+width:100%;height:100%;
+background:rgba(0,0,0,0.95);
+display:none;
+justify-content:center;
+align-items:flex-start;
+padding:30px 15px;
+z-index:999;
+overflow:auto;
+}
+
+.modal-content{
+max-width:900px;width:100%;
+background:#0b1220;
+padding:20px;border-radius:12px;
+position:relative;
+}
+
+.close{
+position:absolute;
+top:10px;right:15px;
+cursor:pointer;font-size:20px;
+}
+
+/* REPORT */
+.fullscreen{
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+background:#0b1220;
+z-index:2000;
+display:none;
+overflow:auto;
+padding:20px;
+}
+
+.report-box{
+max-width:900px;
+margin:auto;
+background:rgba(255,255,255,0.04);
+padding:20px;
+border-radius:12px;
+}
+
+/* BEFORE AFTER */
+.ba-container{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+margin-top:10px;
+}
+.ba-box{
+background:rgba(255,255,255,0.04);
+padding:10px;border-radius:10px;
+}
+.ba-box h5{color:var(--accent);font-size:12px;margin-bottom:5px;}
+.ba-box img{width:100%;border-radius:8px;}
+
+/* BUTTON */
+button{
+background:rgba(255,255,255,0.08);
+border:1px solid rgba(255,255,255,0.1);
+color:white;padding:8px 12px;
+border-radius:8px;cursor:pointer;
+}
+button:hover{border-color:var(--accent);}
+
+/* WHATSAPP */
+.whatsapp{
+position:fixed;
+bottom:20px;right:20px;
+background:#25D366;color:white;
+padding:12px 14px;border-radius:50px;
+text-decoration:none;
+}
+
+@media(max-width:600px){
+.ba-container{grid-template-columns:1fr;}
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<div>Khairil Anwar</div>
+<div>
+<a href="#it">IT</a>
+<a href="#diy">DIY</a>
+</div>
+</nav>
+
+<section class="hero">
+<img src="images/profile.jpg">
+<h1>Tech Problem Solver</h1>
+<p>Network • Hardware • Software • DIY Engineering</p>
+</section>
+
+<section id="it" class="section">
+<h2>IT Case Studies</h2>
+<div class="card" onclick="openCase(0)">Network Engineering</div>
+<div class="card" onclick="openCase(1)">Hardware Engineering</div>
+<div class="card" onclick="openCase(2)">Software / System</div>
+</section>
+
+<section id="diy" class="section">
+<h2>DIY Engineering</h2>
+<div class="card" onclick="openCase(3)">DIY Projects</div>
+</section>
+
+<div id="modal" class="modal">
+<div class="modal-content">
+<span class="close" onclick="closeModal()">✖</span>
+<div id="modal-body"></div>
+</div>
+</div>
+
+<div id="report" class="fullscreen">
+<div class="report-box">
+<span class="close" onclick="closeReport()">✖</span>
+<div id="report-body"></div>
+</div>
+</div>
+
+<a class="whatsapp" target="_blank"
+href="https://wa.me/60134570863?text=Hi%20Khairil%20I%20viewed%20your%20portfolio">
+💬 WhatsApp
+</a>
+
+<script>
+
+/* ================= CASE DATA ================= */
+
+let cases = [
+
+{
+title:"Network Engineering",
+items:[
+{
+name:"WiFi Coverage Issue",
+content:`<p><b>Problem:</b> Weak WiFi coverage</p>
+<p><b>Fix:</b> AP optimization</p>
+<p><b>Result:</b> Stable coverage</p>`,
+
+steps:`<h3>Resolution Steps</h3>
+<p>1. Site survey</p>
+<p>2. Signal analysis</p>
+<p>3. AP repositioning</p>
+<p>4. Channel optimization</p>
+<p>5. Testing</p>`,
+
+tools:`<h3>Tools Used</h3>
+<p>• WiFi Analyzer</p>
+<p>• Network Tester</p>
+<p>• Router Admin Console</p>`,
+
+impact:`<h3>Impact</h3>
+<p>• 80% reduction in connectivity complaints</p>
+<p>• Stable network across all zones</p>`
+}
+]
+},
+
+{
+title:"Hardware Engineering",
+items:[
+{
+name:"Motherboard Failure",
+content:`<p><b>Problem:</b> System not powering on</p>
+<p><b>Fix:</b> Component replacement</p>
+<p><b>Result:</b> Restored system</p>`,
+
+steps:`<h3>Resolution Steps</h3>
+<p>1. PSU testing</p>
+<p>2. Component check</p>
+<p>3. Fault isolation</p>
+<p>4. Replacement</p>
+<p>5. Testing</p>`,
+
+tools:`<h3>Tools Used</h3>
+<p>• Multimeter</p>
+<p>• Screwdriver kit</p>
+<p>• Spare components</p>`,
+
+impact:`<h3>Impact</h3>
+<p>• Reduced downtime</p>
+<p>• Cost saving from replacement</p>`
+}
+]
+},
+
+{
+title:"Software / System",
+items:[
+{
+name:"System Slow",
+content:`<p><b>Problem:</b> System lag</p>
+<p><b>Fix:</b> Optimization</p>
+<p><b>Result:</b> Improved speed</p>`,
+
+steps:`<h3>Resolution Steps</h3>
+<p>1. Analyze startup</p>
+<p>2. Remove unnecessary apps</p>
+<p>3. Optimize system</p>
+<p>4. Testing</p>`,
+
+tools:`<h3>Tools Used</h3>
+<p>• Task Manager</p>
+<p>• System Config</p>
+<p>• Disk Cleanup</p>`,
+
+impact:`<h3>Impact</h3>
+<p>• Faster boot time</p>
+<p>• Improved user productivity</p>`
+}
+]
+},
+
+{
+title:"DIY Engineering",
+items:[
+{
+name:"Smart Irrigation",
+content:`<p><b>Problem:</b> Manual watering</p>
+<p><b>Fix:</b> Automation</p>
+<p><b>Result:</b> Fully automated system</p>`,
+
+steps:`<h3>Build Steps</h3>
+<p>1. Design system</p>
+<p>2. Select components</p>
+<p>3. Build wiring</p>
+<p>4. Testing</p>`,
+
+tools:`<h3>Tools Used</h3>
+<p>• Relay module</p>
+<p>• Soil sensor</p>
+<p>• Power supply</p>`,
+
+impact:`<h3>Impact</h3>
+<p>• Reduced manual work</p>
+<p>• Consistent watering</p>`
+}
+]
+}
+
+];
+
+/* ================= SYSTEM ================= */
+
+let main=0;
+let index=0;
+
+function openCase(i){
+main=i;
+index=0;
+show();
+document.getElementById('modal').style.display='flex';
+}
+
+function show(){
+let c=cases[main];
+let item=c.items[index];
+
+document.getElementById('modal-body').innerHTML=`
+<h2>${c.title}</h2>
+<h3 style="color:#38bdf8">${item.name}</h3>
+${item.content}
+
+<br>
+<button onclick="prev()">⬅ Prev</button>
+<button onclick="next()">Next ➡</button>
+<button onclick="openReport()">📄 Full Report</button>
+`;
+}
+
+function next(){
+let c=cases[main];
+index=(index+1)%c.items.length;
+show();
+}
+
+function prev(){
+let c=cases[main];
+index=(index-1+c.items.length)%c.items.length;
+show();
+}
+
+function openReport(){
+let c=cases[main];
+let item=c.items[index];
+
+document.getElementById('report-body').innerHTML=`
+<h1>${c.title}</h1>
+<h2>${item.name}</h2>
+<hr>
+${item.content}
+${item.steps}
+${item.tools}
+${item.impact}
+`;
+
+document.getElementById('report').style.display='block';
+}
+
+function closeModal(){document.getElementById('modal').style.display='none';}
+function closeReport(){document.getElementById('report').style.display='none';}
+
+</script>
+
+</body>
+</html>
