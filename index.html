@@ -1,129 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Khairil Anwar | Tech & Field Systems Specialist</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Khairil Anwar | Portfolio</title>
 
 <style>
-:root{
-  --bg:#0b1220;
-  --card:#111a2e;
-  --accent:#38bdf8;
-  --text:#e5e7eb;
-  --muted:#94a3b8;
-  --border:rgba(255,255,255,0.08);
-}
-
-*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif;}
-body{background:var(--bg);color:var(--text);line-height:1.6;}
-
-nav{
-  position:sticky;top:0;
-  display:flex;justify-content:space-between;align-items:center;
-  flex-wrap:wrap;
-  padding:12px 16px;
-  background:rgba(11,18,32,0.9);
-  backdrop-filter:blur(10px);
-  border-bottom:1px solid var(--border);
-}
-
-nav h1{color:var(--accent);font-size:14px;}
-nav a{color:var(--muted);text-decoration:none;margin-right:10px;font-size:12px;}
-nav a:hover{color:var(--accent);}
-
-.hero{text-align:center;padding:60px 16px;}
-.hero img{
-  width:110px;height:110px;border-radius:50%;
-  object-fit:cover;border:2px solid var(--accent);
-}
-.hero h2{font-size:28px;}
-.hero p{color:var(--muted);font-size:13px;margin-top:8px;}
-
-.section{max-width:1000px;margin:auto;padding:30px 16px;}
-.section h3{border-left:4px solid var(--accent);padding-left:10px;margin-bottom:15px;font-size:16px;}
-
-.card{
-  background:var(--card);
-  padding:14px;
-  border-radius:10px;
-  border:1px solid var(--border);
-  margin-bottom:10px;
-  font-size:13px;
-}
-
-a{color:var(--accent);text-decoration:none;}
-footer{text-align:center;padding:20px;font-size:12px;color:var(--muted);}
+body{font-family:Inter;background:#0b1220;color:#e5e7eb;margin:0}
+h1{text-align:center;color:#38bdf8;padding:30px}
+.section{max-width:900px;margin:auto;padding:10px}
+.card{background:#111a2e;padding:14px;margin:10px 0;border-radius:10px}
+a{color:#38bdf8;text-decoration:none}
+nav{text-align:center;padding:10px}
+nav a{margin:0 10px;color:#94a3b8}
 </style>
 </head>
 
 <body>
 
+<h1>Khairil Anwar Portfolio</h1>
+
 <nav>
-  <h1>Khairil Anwar</h1>
-  <div>
-    <a href="#about">About</a>
-    <a href="#background">Background</a>
-    <a href="#cert">Certificates</a>
-    <a href="#it">IT</a>
-    <a href="#diy">DIY</a>
-    <a href="#field">Field</a>
-    <a href="#contact">Contact</a>
-  </div>
+  <a href="certificates.html">Certificates</a>
+  <a href="it/index.html">IT Case Study</a>
+  <a href="diy/index.html">DIY Projects</a>
+  <a href="spiritual/index.html">Spiritual Cases</a>
 </nav>
 
-<section class="hero">
-  <img src="images/profile.jpg">
-  <h2>Tech & Field Systems Specialist</h2>
-  <p>IT • Networking • Infrastructure • DIY Engineering</p>
-</section>
+<div class="section">
 
-<section id="about" class="section">
-<h3>About</h3>
-<div class="card">Hybrid technical specialist focused on real-world systems and problem solving.</div>
-</section>
+<div class="card">About: IT + Infrastructure + DIY Engineering + Field Systems</div>
 
-<section id="background" class="section">
-<h3>Background</h3>
-<div class="card">IT Infrastructure & Networking</div>
-<div class="card">CCTV & Security Systems</div>
-<div class="card">Fiber & Connectivity</div>
-<div class="card">DIY Automation Systems</div>
-</section>
+<div class="card"><b>Contact:</b><br>
+Email: karustam013@gmail.com<br>
+Phone: +60134570863
+</div>
 
-<section id="cert" class="section">
-<h3>Certificates</h3>
-<div class="card"><a href="cert1.pdf">Master of IT</a></div>
-<div class="card"><a href="cert2.pdf">Bachelor of IT</a></div>
-<div class="card"><a href="cert3.pdf">Diploma IT</a></div>
-</section>
-
-<section id="it" class="section">
-<h3>IT Case Studies</h3>
-<div class="card"><a href="network.html">Network Engineering</a></div>
-<div class="card"><a href="hardware.html">Hardware Engineering</a></div>
-<div class="card"><a href="software.html">Software/System</a></div>
-</section>
-
-<section id="diy" class="section">
-<h3>DIY Projects</h3>
-<div class="card"><a href="diy.html">Automation System</a></div>
-</section>
-
-<section id="field" class="section">
-<h3>Field Work</h3>
-<div class="card"><a href="field.html">Environmental & Field Study</a></div>
-</section>
-
-<section id="contact" class="section">
-<h3>Contact</h3>
-<div class="card">Email: karustam013@gmail.com</div>
-<div class="card">Phone: +60134570863</div>
-</section>
-
-<footer>Tech & Field Systems Specialist</footer>
+</div>
 
 </body>
 </html>
