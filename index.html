@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Khairil Anwar | Tech Problem Solver</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#0b1220;
+  --card:#111a2e;
+  --accent:#38bdf8;
+  --text:#e5e7eb;
+  --muted:#94a3b8;
+  --border:rgba(255,255,255,0.08);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif;}
+
+body{background:var(--bg);color:var(--text);line-height:1.6;}
+
+nav{
+  position:sticky;top:0;
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;
+  padding:12px 16px;
+  background:rgba(11,18,32,0.9);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+}
+
+nav h1{color:var(--accent);font-size:14px;}
+nav a{color:var(--muted);text-decoration:none;margin-right:10px;font-size:12px;}
+nav a:hover{color:var(--accent);}
+
+.hero{text-align:center;padding:60px 16px;}
+.hero h2{font-size:28px;}
+.hero p{color:var(--muted);font-size:13px;margin-top:8px;}
+
+.btn{
+  display:inline-block;margin-top:15px;
+  padding:10px 14px;
+  border:1px solid var(--accent);
+  border-radius:999px;
+  color:var(--accent);
+  font-size:13px;
+  text-decoration:none;
+}
+
+.section{max-width:1000px;margin:auto;padding:30px 16px;}
+
+.section h3{
+  border-left:4px solid var(--accent);
+  padding-left:10px;
+  margin-bottom:15px;
+  font-size:16px;
+}
+
+.card{
+  background:var(--card);
+  padding:14px;
+  border-radius:10px;
+  border:1px solid var(--border);
+  margin-bottom:10px;
+  font-size:13px;
+}
+
+a{color:var(--accent);text-decoration:none;}
+
+footer{
+  text-align:center;
+  padding:20px;
+  font-size:12px;
+  color:var(--muted);
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <h1>Khairil Anwar</h1>
+  <div>
+    <a href="#about">About</a>
+    <a href="#timeline">Timeline</a>
+    <a href="#it">IT</a>
+    <a href="#diy">DIY</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <h2>Tech Problem Solver</h2>
+  <p>IT Systems • Networking • Infrastructure • DIY Engineering</p>
+  <a class="btn" href="cv.pdf" download>Download CV</a>
+</section>
+
+<section id="about" class="section">
+  <h3>About</h3>
+  <p style="color:var(--muted)">
+    10+ years experience in IT systems, networking, and infrastructure troubleshooting with practical engineering mindset.
+  </p>
+</section>
+
+<section id="timeline" class="section">
+  <h3>Career Timeline</h3>
+  <div class="card">2014–2016 | IT Junior Executive</div>
+  <div class="card">2016–2017 | Technician</div>
+  <div class="card">2017–2018 | Fiber Installer</div>
+  <div class="card">2018–2019 | Security Systems</div>
+  <div class="card">2019–2026 | IT Executive</div>
+</section>
+
+<section id="it" class="section">
+  <h3>IT Case Studies</h3>
+  <div class="card"><a href="network.html">Network Engineering</a></div>
+  <div class="card"><a href="hardware.html">Hardware Engineering</a></div>
+  <div class="card"><a href="software.html">Software / System</a></div>
+</section>
+
+<section id="diy" class="section">
+  <h3>DIY Systems</h3>
+  <div class="card"><a href="diy.html">Automation Projects</a></div>
+</section>
+
+<section id="contact" class="section">
+  <h3>Contact</h3>
+  <div class="card">Email: karustam013@gmail.com</div>
+  <div class="card">Phone: +60134570863</div>
+</section>
+
+<footer>Tech Problem Solver • Engineering Approach</footer>
+
+</body>
+  </html>
