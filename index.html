@@ -96,8 +96,8 @@ font-size:13px;
 /* GALLERY */
 .gallery{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
-gap:10px;
+grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+gap:8px;
 margin-top:10px;
 }
 
@@ -105,6 +105,11 @@ margin-top:10px;
 width:100%;
 border-radius:8px;
 cursor:pointer;
+transition:0.2s;
+}
+
+.gallery img:hover{
+transform:scale(1.03);
 }
 
 /* ZOOM */
@@ -165,7 +170,7 @@ color:var(--muted);
 <p>Network • Hardware • Software • DIY Engineering</p>
 </section>
 
-<!-- IT CATEGORY -->
+<!-- IT -->
 <section id="it" class="section">
 <h2>IT Case Studies</h2>
 
@@ -216,7 +221,7 @@ class="whatsapp" target="_blank">
 
 <script>
 
-/* ================= STRUCTURE ================= */
+/* ================= CASE STRUCTURE ================= */
 
 let cases = [
 
@@ -230,17 +235,25 @@ content:`
 <p><b>Problem:</b> Weak WiFi coverage</p>
 <p><b>Fix:</b> AP repositioning + tuning</p>
 <p><b>Result:</b> Stable network performance</p>
+
 <div class="gallery">
 <img src="images/net1.jpg" onclick="zoom(this)">
+<img src="images/net2.jpg" onclick="zoom(this)">
+<img src="images/net3.jpg" onclick="zoom(this)">
 </div>
 `
 },
 {
 name:"Case 2 - Downtime Recovery",
 content:`
-<p><b>Problem:</b> Intermittent network outage</p>
+<p><b>Problem:</b> Network outage</p>
 <p><b>Fix:</b> Switch replacement + cable tracing</p>
-<p><b>Result:</b> Full recovery achieved</p>
+<p><b>Result:</b> Full restoration achieved</p>
+
+<div class="gallery">
+<img src="images/net4.jpg" onclick="zoom(this)">
+<img src="images/net5.jpg" onclick="zoom(this)">
+</div>
 `
 }
 ]
@@ -253,9 +266,14 @@ items:[
 {
 name:"Case 1 - Motherboard Issue",
 content:`
-<p><b>Problem:</b> System not powering ON</p>
+<p><b>Problem:</b> No power boot</p>
 <p><b>Fix:</b> Component-level diagnosis</p>
 <p><b>Result:</b> Restored system</p>
+
+<div class="gallery">
+<img src="images/hw1.jpg" onclick="zoom(this)">
+<img src="images/hw2.jpg" onclick="zoom(this)">
+</div>
 `
 },
 {
@@ -264,29 +282,42 @@ content:`
 <p><b>Problem:</b> Overheating shutdown</p>
 <p><b>Fix:</b> Cooling system service</p>
 <p><b>Result:</b> Stable performance</p>
+
+<div class="gallery">
+<img src="images/hw3.jpg" onclick="zoom(this)">
+</div>
 `
 }
 ]
 },
 
-/* SOFTWARE / SYSTEM */
+/* SOFTWARE */
 {
 title:"Software / System",
 items:[
 {
 name:"Case 1 - System Performance Issue",
 content:`
-<p><b>Problem:</b> Slow system performance</p>
+<p><b>Problem:</b> Slow PCs</p>
 <p><b>Fix:</b> OS cleanup + optimization</p>
-<p><b>Result:</b> Improved speed & responsiveness</p>
+<p><b>Result:</b> Improved performance</p>
+
+<div class="gallery">
+<img src="images/sys1.jpg" onclick="zoom(this)">
+<img src="images/sys2.jpg" onclick="zoom(this)">
+</div>
 `
 },
 {
-name:"Case 2 - Software Deployment Issue",
+name:"Case 2 - Deployment Issue",
 content:`
-<p><b>Problem:</b> Application compatibility errors</p>
-<p><b>Fix:</b> Driver + configuration fix</p>
-<p><b>Result:</b> Stable deployment environment</p>
+<p><b>Problem:</b> Software errors</p>
+<p><b>Fix:</b> Driver + config update</p>
+<p><b>Result:</b> Stable system</p>
+
+<div class="gallery">
+<img src="images/sys3.jpg" onclick="zoom(this)">
+</div>
 `
 }
 ]
@@ -299,20 +330,26 @@ items:[
 {
 name:"Case 1 - Irrigation System",
 content:`
-<p><b>Problem:</b> Manual watering inconsistent</p>
+<p><b>Problem:</b> Manual watering inconsistency</p>
 <p><b>Build:</b> Sensor + relay automation</p>
 <p><b>Result:</b> Fully automated system</p>
+
 <div class="gallery">
 <img src="images/diy1.jpg" onclick="zoom(this)">
+<img src="images/diy2.jpg" onclick="zoom(this)">
 </div>
 `
 },
 {
 name:"Case 2 - Lighting Automation",
 content:`
-<p><b>Problem:</b> Energy waste from manual lights</p>
-<p><b>Build:</b> Light sensor automation</p>
+<p><b>Problem:</b> Energy waste</p>
+<p><b>Build:</b> Light sensor system</p>
 <p><b>Result:</b> Auto ON/OFF system</p>
+
+<div class="gallery">
+<img src="images/diy3.jpg" onclick="zoom(this)">
+</div>
 `
 }
 ]
