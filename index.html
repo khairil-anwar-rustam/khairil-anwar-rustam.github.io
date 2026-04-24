@@ -33,7 +33,12 @@ nav a:hover{color:var(--accent);}
 
 /* HERO */
 .hero{text-align:center;padding:110px 20px 60px;}
-.hero img{width:120px;height:120px;border-radius:50%;border:2px solid var(--accent);object-fit:cover;margin-bottom:15px;}
+.hero img{
+width:120px;height:120px;border-radius:50%;
+border:2px solid var(--accent);
+object-fit:cover;
+margin-bottom:15px;
+}
 .hero h1{font-size:30px;}
 .hero p{color:var(--muted);}
 
@@ -46,7 +51,9 @@ nav a:hover{color:var(--accent);}
 background:var(--glass);
 backdrop-filter:blur(12px);
 border:1px solid rgba(255,255,255,0.08);
-padding:16px;border-radius:14px;margin-bottom:15px;
+padding:16px;
+border-radius:14px;
+margin-bottom:15px;
 cursor:pointer;
 }
 
@@ -77,22 +84,6 @@ cursor:pointer;
 font-size:20px;
 }
 
-/* NAV */
-.slider-nav{
-display:flex;
-justify-content:space-between;
-margin-top:20px;
-}
-
-.btn{
-background:var(--accent);
-color:#000;
-padding:6px 12px;
-border-radius:6px;
-cursor:pointer;
-font-size:13px;
-}
-
 /* GALLERY */
 .gallery{
 display:grid;
@@ -107,9 +98,33 @@ border-radius:8px;
 cursor:pointer;
 transition:0.2s;
 }
+.gallery img:hover{transform:scale(1.03);}
 
-.gallery img:hover{
-transform:scale(1.03);
+/* BEFORE AFTER */
+.ba-container{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+margin-top:10px;
+}
+
+.ba-box{
+background:rgba(255,255,255,0.04);
+padding:10px;
+border-radius:10px;
+border:1px solid rgba(255,255,255,0.08);
+}
+
+.ba-box h5{
+color:var(--accent);
+font-size:12px;
+margin-bottom:5px;
+}
+
+.ba-box img{
+width:100%;
+border-radius:8px;
+cursor:pointer;
 }
 
 /* ZOOM */
@@ -123,7 +138,6 @@ justify-content:center;
 align-items:center;
 z-index:1000;
 }
-
 .zoom img{
 max-width:90%;
 max-height:90%;
@@ -148,6 +162,10 @@ text-align:center;
 padding:30px;
 color:var(--muted);
 }
+
+@media(max-width:600px){
+.ba-container{grid-template-columns:1fr;}
+}
 </style>
 </head>
 
@@ -155,7 +173,7 @@ color:var(--muted);
 
 <!-- NAV -->
 <nav>
-<div>Khairil</div>
+<div>Khairil Anwar</div>
 <div>
 <a href="#it">IT</a>
 <a href="#diy">DIY</a>
@@ -173,11 +191,9 @@ color:var(--muted);
 <!-- IT -->
 <section id="it" class="section">
 <h2>IT Case Studies</h2>
-
 <div class="card" onclick="openCase(0)">Network</div>
 <div class="card" onclick="openCase(1)">Hardware</div>
 <div class="card" onclick="openCase(2)">Software / System</div>
-
 </section>
 
 <!-- DIY -->
@@ -195,16 +211,8 @@ color:var(--muted);
 <!-- MODAL -->
 <div id="modal" class="modal">
 <div class="modal-content">
-
 <span class="close" onclick="closeModal()">✖</span>
-
 <div id="modal-body"></div>
-
-<div class="slider-nav">
-<div class="btn" onclick="prevCase()">← Prev</div>
-<div class="btn" onclick="nextCase()">Next →</div>
-</div>
-
 </div>
 </div>
 
@@ -215,15 +223,11 @@ color:var(--muted);
 
 <!-- WHATSAPP -->
 <a href="https://wa.me/60134570863?text=Hi%20Khairil%2C%20I%20viewed%20your%20portfolio"
-class="whatsapp" target="_blank">
-💬 WhatsApp
-</a>
+class="whatsapp" target="_blank">💬 WhatsApp</a>
 
 <script>
 
-/* ================= CASE STRUCTURE ================= */
-
-let cases = [
+let cases=[
 
 /* NETWORK */
 {
@@ -233,13 +237,16 @@ items:[
 name:"Case 1 - WiFi Issue",
 content:`
 <p><b>Problem:</b> Weak WiFi coverage</p>
-<p><b>Fix:</b> AP repositioning + tuning</p>
-<p><b>Result:</b> Stable network performance</p>
 
-<div class="gallery">
-<img src="images/net1.jpg" onclick="zoom(this)">
-<img src="images/net2.jpg" onclick="zoom(this)">
-<img src="images/net3.jpg" onclick="zoom(this)">
+<div class="ba-container">
+<div class="ba-box">
+<h5>Before</h5>
+<img src="images/net_before1.jpg" onclick="zoom(this)">
+</div>
+<div class="ba-box">
+<h5>After</h5>
+<img src="images/net_after1.jpg" onclick="zoom(this)">
+</div>
 </div>
 `
 },
@@ -247,12 +254,16 @@ content:`
 name:"Case 2 - Downtime Recovery",
 content:`
 <p><b>Problem:</b> Network outage</p>
-<p><b>Fix:</b> Switch replacement + cable tracing</p>
-<p><b>Result:</b> Full restoration achieved</p>
 
-<div class="gallery">
-<img src="images/net4.jpg" onclick="zoom(this)">
-<img src="images/net5.jpg" onclick="zoom(this)">
+<div class="ba-container">
+<div class="ba-box">
+<h5>Before</h5>
+<img src="images/net_before2.jpg" onclick="zoom(this)">
+</div>
+<div class="ba-box">
+<h5>After</h5>
+<img src="images/net_after2.jpg" onclick="zoom(this)">
+</div>
 </div>
 `
 }
@@ -266,25 +277,34 @@ items:[
 {
 name:"Case 1 - Motherboard Issue",
 content:`
-<p><b>Problem:</b> No power boot</p>
-<p><b>Fix:</b> Component-level diagnosis</p>
-<p><b>Result:</b> Restored system</p>
+<p><b>Problem:</b> No boot system</p>
 
-<div class="gallery">
-<img src="images/hw1.jpg" onclick="zoom(this)">
-<img src="images/hw2.jpg" onclick="zoom(this)">
+<div class="ba-container">
+<div class="ba-box">
+<h5>Before</h5>
+<img src="images/hw_before1.jpg" onclick="zoom(this)">
+</div>
+<div class="ba-box">
+<h5>After</h5>
+<img src="images/hw_after1.jpg" onclick="zoom(this)">
+</div>
 </div>
 `
 },
 {
 name:"Case 2 - Thermal Issue",
 content:`
-<p><b>Problem:</b> Overheating shutdown</p>
-<p><b>Fix:</b> Cooling system service</p>
-<p><b>Result:</b> Stable performance</p>
+<p><b>Problem:</b> Overheating</p>
 
-<div class="gallery">
-<img src="images/hw3.jpg" onclick="zoom(this)">
+<div class="ba-container">
+<div class="ba-box">
+<h5>Before</h5>
+<img src="images/hw_before2.jpg" onclick="zoom(this)">
+</div>
+<div class="ba-box">
+<h5>After</h5>
+<img src="images/hw_after2.jpg" onclick="zoom(this)">
+</div>
 </div>
 `
 }
@@ -296,27 +316,36 @@ content:`
 title:"Software / System",
 items:[
 {
-name:"Case 1 - System Performance Issue",
+name:"Case 1 - Performance Issue",
 content:`
-<p><b>Problem:</b> Slow PCs</p>
-<p><b>Fix:</b> OS cleanup + optimization</p>
-<p><b>Result:</b> Improved performance</p>
+<p><b>Problem:</b> Slow system</p>
 
-<div class="gallery">
-<img src="images/sys1.jpg" onclick="zoom(this)">
-<img src="images/sys2.jpg" onclick="zoom(this)">
+<div class="ba-container">
+<div class="ba-box">
+<h5>Before</h5>
+<img src="images/sys_before1.jpg" onclick="zoom(this)">
+</div>
+<div class="ba-box">
+<h5>After</h5>
+<img src="images/sys_after1.jpg" onclick="zoom(this)">
+</div>
 </div>
 `
 },
 {
 name:"Case 2 - Deployment Issue",
 content:`
-<p><b>Problem:</b> Software errors</p>
-<p><b>Fix:</b> Driver + config update</p>
-<p><b>Result:</b> Stable system</p>
+<p><b>Problem:</b> Software error</p>
 
-<div class="gallery">
-<img src="images/sys3.jpg" onclick="zoom(this)">
+<div class="ba-container">
+<div class="ba-box">
+<h5>Before</h5>
+<img src="images/sys_before2.jpg" onclick="zoom(this)">
+</div>
+<div class="ba-box">
+<h5>After</h5>
+<img src="images/sys_after2.jpg" onclick="zoom(this)">
+</div>
 </div>
 `
 }
@@ -328,76 +357,69 @@ content:`
 title:"DIY Engineering",
 items:[
 {
-name:"Case 1 - Irrigation System",
+name:"Case 1 - Irrigation",
 content:`
-<p><b>Problem:</b> Manual watering inconsistency</p>
-<p><b>Build:</b> Sensor + relay automation</p>
-<p><b>Result:</b> Fully automated system</p>
+<p><b>Problem:</b> Manual watering</p>
 
-<div class="gallery">
-<img src="images/diy1.jpg" onclick="zoom(this)">
-<img src="images/diy2.jpg" onclick="zoom(this)">
+<div class="ba-container">
+<div class="ba-box">
+<h5>Before</h5>
+<img src="images/diy_before1.jpg" onclick="zoom(this)">
+</div>
+<div class="ba-box">
+<h5>After</h5>
+<img src="images/diy_after1.jpg" onclick="zoom(this)">
+</div>
 </div>
 `
 },
 {
-name:"Case 2 - Lighting Automation",
+name:"Case 2 - Lighting",
 content:`
 <p><b>Problem:</b> Energy waste</p>
-<p><b>Build:</b> Light sensor system</p>
-<p><b>Result:</b> Auto ON/OFF system</p>
 
-<div class="gallery">
-<img src="images/diy3.jpg" onclick="zoom(this)">
+<div class="ba-container">
+<div class="ba-box">
+<h5>Before</h5>
+<img src="images/light_before.jpg" onclick="zoom(this)">
+</div>
+<div class="ba-box">
+<h5>After</h5>
+<img src="images/light_after.jpg" onclick="zoom(this)">
+</div>
 </div>
 `
 }
 ]
 }
+
 ];
 
 let mainIndex=0;
 let subIndex=0;
 
-/* OPEN */
 function openCase(i){
 mainIndex=i;
 subIndex=0;
-renderCase();
+render();
 document.getElementById('modal').style.display='flex';
 }
 
-/* RENDER */
-function renderCase(){
-let group=cases[mainIndex];
-let item=group.items[subIndex];
+function render(){
+let g=cases[mainIndex];
+let item=g.items[subIndex];
 
 document.getElementById('modal-body').innerHTML=`
-<h2>${group.title}</h2>
-<h3 style="color:#38bdf8;margin-top:5px">${item.name}</h3>
+<h2>${g.title}</h2>
+<h3 style="color:#38bdf8">${item.name}</h3>
 <div style="margin-top:10px">${item.content}</div>
 `;
 }
 
-/* NAV */
-function nextCase(){
-let group=cases[mainIndex];
-subIndex=(subIndex+1)%group.items.length;
-renderCase();
-}
-
-function prevCase(){
-let group=cases[mainIndex];
-subIndex=(subIndex-1+group.items.length)%group.items.length;
-renderCase();
-}
-
-/* CLOSE */
 function closeModal(){
 document.getElementById('modal').style.display='none';
 }
 
-/* ZOOM */
 function zoom(img){
 document.getElementById('zoom-img').src=img.src;
 document.getElementById('zoom').style.display='flex';
