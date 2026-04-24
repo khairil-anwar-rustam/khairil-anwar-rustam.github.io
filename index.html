@@ -3,40 +3,218 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Khairil Anwar | Portfolio</title>
+<title>Khairil Anwar | Tech Problem Solver</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-body{font-family:Inter;background:#0b1220;color:#e5e7eb;margin:0}
-h1{text-align:center;color:#38bdf8;padding:30px}
-.section{max-width:900px;margin:auto;padding:10px}
-.card{background:#111a2e;padding:14px;margin:10px 0;border-radius:10px}
-a{color:#38bdf8;text-decoration:none}
-nav{text-align:center;padding:10px}
-nav a{margin:0 10px;color:#94a3b8}
+:root{
+--bg:#0b1220;
+--glass:rgba(255,255,255,0.05);
+--accent:#38bdf8;
+--text:#e5e7eb;
+--muted:#94a3b8;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif;}
+body{background:linear-gradient(135deg,#0b1220,#0f172a);color:var(--text);}
+
+/* NAV */
+nav{position:fixed;top:0;width:100%;display:flex;justify-content:space-between;padding:12px 20px;background:rgba(0,0,0,0.4);backdrop-filter:blur(12px);z-index:100;}
+nav a{color:var(--muted);margin-left:15px;text-decoration:none;font-size:13px;}
+nav a:hover{color:var(--accent);}
+
+/* HERO */
+.hero{text-align:center;padding:110px 20px 60px;}
+.hero img{width:120px;height:120px;border-radius:50%;border:2px solid var(--accent);object-fit:cover;margin-bottom:15px;}
+.hero h1{font-size:30px;}
+.hero p{color:var(--muted);}
+
+/* SECTION */
+.section{max-width:1000px;margin:auto;padding:60px 20px;}
+.section h2{border-left:4px solid var(--accent);padding-left:10px;margin-bottom:20px;}
+
+/* CARD */
+.card{
+background:var(--glass);
+backdrop-filter:blur(12px);
+border:1px solid rgba(255,255,255,0.08);
+padding:16px;border-radius:14px;margin-bottom:15px;
+cursor:pointer;
+}
+
+/* MODAL */
+.modal{
+position:fixed;top:0;left:0;width:100%;height:100%;
+background:rgba(0,0,0,0.95);
+display:none;z-index:999;
+justify-content:center;align-items:flex-start;
+overflow:auto;padding:30px 20px;
+}
+
+.modal-content{
+max-width:900px;width:100%;
+background:#0b1220;
+padding:20px;border-radius:12px;
+position:relative;
+}
+
+.close{position:absolute;right:15px;top:10px;cursor:pointer;font-size:20px;}
+
+/* SLIDER */
+.slider-nav{
+display:flex;justify-content:space-between;margin-top:15px;
+}
+.btn{
+background:var(--accent);
+color:#000;
+padding:6px 12px;
+border-radius:6px;
+cursor:pointer;
+font-size:13px;
+}
+
+/* GALLERY */
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-top:10px;}
+.gallery img{width:100%;border-radius:8px;cursor:pointer;}
+
+/* IMAGE ZOOM */
+.zoom{
+position:fixed;top:0;left:0;width:100%;height:100%;
+background:rgba(0,0,0,0.95);
+display:none;justify-content:center;align-items:center;z-index:1000;
+}
+.zoom img{max-width:90%;max-height:90%;}
+
+footer{text-align:center;padding:30px;color:var(--muted);}
 </style>
 </head>
 
 <body>
 
-<h1>Khairil Anwar Portfolio</h1>
-
 <nav>
-  <a href="certificates.html">Certificates</a>
-  <a href="it/index.html">IT Case Study</a>
-  <a href="diy/index.html">DIY Projects</a>
-  <a href="spiritual/index.html">Spiritual Cases</a>
+<div>Khairil</div>
+<div>
+<a href="#it">IT</a>
+<a href="#diy">DIY</a>
+<a href="#contact">Contact</a>
+</div>
 </nav>
 
-<div class="section">
+<section class="hero">
+<img src="images/profile.jpg">
+<h1>Tech Problem Solver</h1>
+<p>Real-world systems • Network • Infrastructure</p>
+</section>
 
-<div class="card">About: IT + Infrastructure + DIY Engineering + Field Systems</div>
+<section id="it" class="section">
+<h2>IT Case Studies</h2>
 
-<div class="card"><b>Contact:</b><br>
-Email: karustam013@gmail.com<br>
-Phone: +60134570863
+<div class="card" onclick="openCase(0)">Network Optimization</div>
+<div class="card" onclick="openCase(1)">Hardware Repair</div>
+
+</section>
+
+<section id="diy" class="section">
+<h2>DIY Projects</h2>
+
+<div class="card" onclick="openCase(2)">Smart Irrigation</div>
+
+</section>
+
+<section id="contact" class="section">
+<h2>Contact</h2>
+<div>Email: karustam013@gmail.com</div>
+</section>
+
+<!-- MODAL -->
+<div id="modal" class="modal">
+<div class="modal-content">
+<span class="close" onclick="closeModal()">✖</span>
+<div id="modal-body"></div>
+
+<div class="slider-nav">
+<div class="btn" onclick="prevCase()">← Prev</div>
+<div class="btn" onclick="nextCase()">Next →</div>
 </div>
 
 </div>
+</div>
+
+<!-- IMAGE ZOOM -->
+<div id="zoom" class="zoom" onclick="this.style.display='none'">
+<img id="zoom-img">
+</div>
+
+<script>
+
+let cases = [
+{
+title:"Network Optimization",
+content:`
+<p><b>Problem:</b> Weak WiFi</p>
+<p><b>Action:</b> AP tuning</p>
+<p><b>Result:</b> Stable network</p>
+<div class="gallery">
+<img src="images/net1.jpg" onclick="zoom(this)">
+</div>
+`
+},
+{
+title:"Hardware Repair",
+content:`
+<p><b>Problem:</b> No power</p>
+<p><b>Action:</b> Board repair</p>
+<p><b>Result:</b> Restored</p>
+<div class="gallery">
+<img src="images/hw1.jpg" onclick="zoom(this)">
+</div>
+`
+},
+{
+title:"Smart Irrigation",
+content:`
+<p><b>Build:</b> Sensor automation</p>
+<div class="gallery">
+<img src="images/diy1.jpg" onclick="zoom(this)">
+</div>
+`
+}
+];
+
+let current = 0;
+
+function openCase(i){
+current=i;
+renderCase();
+document.getElementById('modal').style.display='flex';
+}
+
+function renderCase(){
+document.getElementById('modal-body').innerHTML=
+`<h2>${cases[current].title}</h2>${cases[current].content}`;
+}
+
+function closeModal(){
+document.getElementById('modal').style.display='none';
+}
+
+function nextCase(){
+current = (current+1) % cases.length;
+renderCase();
+}
+
+function prevCase(){
+current = (current-1+cases.length)%cases.length;
+renderCase();
+}
+
+function zoom(img){
+document.getElementById('zoom-img').src = img.src;
+document.getElementById('zoom').style.display='flex';
+}
+
+</script>
 
 </body>
-</html>
+  </html>
