@@ -243,16 +243,12 @@ const activities = [
     desc: "Design and implementation of an integrated projection system involving ceiling-mounted projector alignment and projection screen installation for optimized visual display performance in an institutional environment",
     story: "Conducted systematic site evaluation including projection distance analysis, ceiling-mount structural assessment, precise optical alignment to eliminate keystone distortion, and installation of a projection screen with optimized aspect ratio calibration. Final phase included signal testing, resolution configuration, and image quality optimization for academic presentation environments",
     impact: "Improved institutional audiovisual infrastructure, enhancing lecture delivery quality and visual clarity for over 50 active users across teaching and presentation sessions",
-    gallery: {
-      before: [
+    gallery: {      
         "Activities/beforeprojector.jpg",
-        "Activities/beforeprojector1.jpg"
-      ],
-      after: [
+        "Activities/beforeprojector1.jpg"   
         "Activities/afterprojector.jpg",
         "Activities/afterprojector1.jpg",
-        "Activities/afterprojector2.jpg"
-      ]
+        "Activities/afterprojector2.jpg"    
     }
   }
 ];
@@ -275,33 +271,10 @@ c.appendChild(d);
 });
 }
 
-function openActivity(a){
-document.getElementById('modal').style.display='flex';
-
-document.getElementById('modal-body').innerHTML=`
-<h2>${a.name}</h2>
-<p>${a.story}</p>
+function openActivity(a){ document.getElementById('modal').style.display='flex'; 
+document.getElementById('modal-body').innerHTML= 
+<h2>${a.name}</h2> <p>${a.story}</p> 
 <p><b>Impact:</b> ${a.impact}</p>
-
-<div style="margin-top:20px;">
-
-  <h3 style="color:#38bdf8;margin-bottom:10px;">Before</h3>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:20px;">
-    ${a.gallery.before.map(img => `
-      <img src="${img}" style="width:100%;border-radius:10px;border:1px solid rgba(255,255,255,0.1)">
-    `).join('')}
-  </div>
-
-  <h3 style="color:#38bdf8;margin-bottom:10px;">After</h3>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;">
-    ${a.gallery.after.map(img => `
-      <img src="${img}" style="width:100%;border-radius:10px;border:1px solid rgba(255,255,255,0.1)">
-    `).join('')}
-  </div>
-
-</div>
-`;
-}
 
 function openModal(i){
 document.getElementById('modal').style.display='flex';
