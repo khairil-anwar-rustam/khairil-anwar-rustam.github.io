@@ -213,9 +213,9 @@ With hands-on experience in real-world, <B>I turn real-world problems into pract
 
 <section id="cert" class="section">
 <h2>Certificates</h2>
-<div class="cert-card" onclick="openPDF('Diploma.pdf')">Diploma</div>
-<div class="cert-card" onclick="openPDF('Bachelor.pdf')">Bachelor's Degree</div>
-<div class="cert-card" onclick="openPDF('cert3.pdf')">Master's Degree</div>
+<div class="cert-card" onclick="openCert('img/diploma.jpg')">Diploma</div>
+<div class="cert-card" onclick="openCert('img/bachelor.jpg')">Bachelor's Degree</div>
+<div class="cert-card" onclick="openCert('img/master.jpg')">Master's Degree</div>
 </section>
 
 <section id="social" class="section">
@@ -242,11 +242,22 @@ With hands-on experience in real-world, <B>I turn real-world problems into pract
 </div>
 </div>
 
-<!-- PDF -->
-<div id="pdfModal" class="modal">
+<!-- img -->
+<div id="certModal" class="modal">
 <div class="modal-content">
-<span class="close" onclick="closePDF()">✖</span>
-<iframe id="pdfFrame" style="width:100%;height:80vh;border:none;"></iframe>
+<span class="close" onclick="closeCert()">✖</span>
+
+<div style="text-align:center;">
+<img id="certImage" style="max-width:100%;transition:0.3s;cursor:zoom-in;">
+</div>
+
+<br>
+<div style="text-align:center;">
+<button onclick="zoomIn()">Zoom In</button>
+<button onclick="zoomOut()">Zoom Out</button>
+<button onclick="resetZoom()">Reset</button>
+</div>
+
 </div>
 </div>
 
@@ -463,13 +474,38 @@ document.getElementById('report-body').innerHTML=`
 document.getElementById('report').style.display='block';
 }
 
-function openPDF(file){
-document.getElementById('pdfFrame').src=file;
-document.getElementById('pdfModal').style.display='flex';
+let zoomLevel = 1;
+
+function openCert(img){
+document.getElementById('certImage').src = img;
+document.getElementById('certModal').style.display = 'flex';
+zoomLevel = 1;
+applyZoom();
 }
-function closePDF(){
-document.getElementById('pdfModal').style.display='none';
-document.getElementById('pdfFrame').src="";
+
+function closeCert(){
+document.getElementById('certModal').style.display = 'none';
+document.getElementById('certImage').src = "";
+}
+
+function zoomIn(){
+zoomLevel += 0.2;
+applyZoom();
+}
+
+function zoomOut(){
+zoomLevel -= 0.2;
+if(zoomLevel < 0.5) zoomLevel = 0.5;
+applyZoom();
+}
+
+function resetZoom(){
+zoomLevel = 1;
+applyZoom();
+}
+
+function applyZoom(){
+document.getElementById('certImage').style.transform = `scale(${zoomLevel})`;
 }
 function closeModal(){document.getElementById('modal').style.display='none';}
 function closeReport(){document.getElementById('report').style.display='none';}
