@@ -190,6 +190,28 @@ button{
   }
 }
 
+/* FIX IMAGE RESPONSIVENESS */
+.slider-box img,
+.gallery img{
+  width:100%;
+  height:auto;
+  object-fit:cover;
+  border-radius:10px;
+}
+
+/* SAFE TOUCH SWIPE */
+.gallery-swipe{
+  width:100%;
+  user-select:none;
+  touch-action:pan-y;
+}
+
+/* OPTIONAL: make modal scroll safe */
+.modal-content{
+  max-height:90vh;
+  overflow-y:auto;
+}
+
 </style>
 </head>
 
@@ -256,6 +278,9 @@ button{
 
 <script>
 
+let swipeIndex = 0;
+let swipeGallery = [];
+
 const cases = [
 {category:'hardware',name:'Server PSU Failure',problem:'Server shutdown',fix:'Replace PSU',solution:'System restored',steps:['Check logs','Replace PSU'],tools:'Multimeter',impact:'Uptime restored',before:'img/b1.jpg',after:'img/a1.jpg'},
 {category:'iot',name:'Smart Irrigation',problem:'Manual watering',fix:'Automation',solution:'Auto irrigation',steps:['Install sensor','Relay setup'],tools:'ESP32',impact:'80% water saved',before:'img/b5.jpg',after:'img/a5.jpg'}
@@ -302,16 +327,21 @@ c.appendChild(div);
 function openActivity(a){
 document.getElementById('modal').style.display='flex';
 
+swipeGallery = a.gallery;
+swipeIndex = 0;
+
 document.getElementById('modal-body').innerHTML=`
 <h2>${a.name}</h2>
 <p>${a.story}</p>
 <p><b>Impact:</b> ${a.impact}</p>
 
-<div class="gallery">
-${a.gallery.map(img=>`<img src="${img}">`).join('')}
+<div class="gallery-swipe">
+<img id="swipeImg" src="${swipeGallery[swipeIndex]}" style="width:100%;border-radius:10px;">
 </div>
 `;
-}
+
+enableSwipe();
+  }
 
 function openModal(i){
 document.getElementById('modal').style.display='flex';
@@ -362,9 +392,64 @@ function closeCert(){
 document.getElementById('certModal').style.display='none';
 }
 
+function enableSwipe(){
+const img = document.getElementById('swipeImg');
+if(!img) return;
+
+let startX = 0;
+
+img.ontouchstart = (e)=>{
+startX = e.touches[0].clientX;
+};
+
+img.ontouchend = (e)=>{
+let endX = e.changedTouches[0].clientX;
+let diff = startX - endX;
+
+if(Math.abs(diff) < 50) return;
+
+if(diff > 0) nextSwipe();
+else prevSwipe();
+};
+}
+
+function nextSwipe(){
+if(swipeIndex < swipeGallery.length - 1){
+swipeIndex++;
+updateSwipe();
+}
+}
+
+function prevSwipe(){
+if(swipeIndex > 0){
+swipeIndex--;
+updateSwipe();
+}
+}
+
+function updateSwipe(){
+const img = document.getElementById('swipeImg');
+if(img){
+img.src = swipeGallery[swipeIndex];
+}
+  }
+
 renderCases();
 renderActivities();
 
+document.addEventListener('keydown', function(e){
+if(e.key === "Escape"){
+closeModal();
+closeCert();
+}
+});
+
+function outsideClose(e){
+if(e.target.id === 'modal'){
+closeModal();
+}
+  }
+  
 </script>
 
 </body>
