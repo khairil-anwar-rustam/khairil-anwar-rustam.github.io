@@ -171,6 +171,7 @@ text-decoration:none;
 <a href="#it">IT</a>
 <a href="#diy">DIY</a>
 <a href="#cert">Certificates</a>
+<a href="#social">Social</a>
 </div>
 </nav>
 
@@ -200,6 +201,14 @@ text-decoration:none;
 <div class="cert-card" onclick="openPDF('cert1.pdf')">Network Engineering Certificate</div>
 <div class="cert-card" onclick="openPDF('cert2.pdf')">Hardware Engineering Certificate</div>
 <div class="cert-card" onclick="openPDF('cert3.pdf')">Software Engineering Certificate</div>
+</section>
+
+<section id="social" class="section">
+<h2>Social Activities</h2>
+<div class="card" onclick="openSocial(0)">Community Tech Workshop</div>
+<div class="card" onclick="openSocial(1)">University Tech Talk</div>
+<div class="card" onclick="openSocial(2)">Volunteer Repair Program</div>
+<div class="card" onclick="openSocial(3)">STEM Education Outreach</div>
 </section>
 
 <!-- MODAL -->
@@ -450,6 +459,50 @@ document.getElementById('pdfFrame').src="";
 function closeModal(){document.getElementById('modal').style.display='none';}
 function closeReport(){document.getElementById('report').style.display='none';}
 
+
+/* ===== SOCIAL ACTIVITIES (NO IMPACT TO EXISTING SYSTEM) ===== */
+
+let socialActivities = [
+{
+name:"Community Tech Workshop",
+desc:"Conducted hands-on workshop teaching basic hardware repair and troubleshooting.",
+gallery:["img/social1.jpg","img/social1b.jpg"]
+},
+{
+name:"University Tech Talk",
+desc:"Delivered talk on real-world IT problem solving and system design.",
+gallery:["img/social2.jpg","img/social2b.jpg"]
+},
+{
+name:"Volunteer Repair Program",
+desc:"Helped community fix broken laptops and devices for free.",
+gallery:["img/social3.jpg","img/social3b.jpg"]
+},
+{
+name:"STEM Education Outreach",
+desc:"Introduced students to electronics, IoT and automation projects.",
+gallery:["img/social4.jpg","img/social4b.jpg"]
+}
+];
+
+function openSocial(i){
+let item = socialActivities[i];
+
+document.getElementById('modal').style.display='flex';
+
+document.getElementById('modal-body').innerHTML = `
+<h2>${item.name}</h2>
+<p>${item.desc}</p>
+
+<div class="slider-box">
+${item.gallery.map(img=>`
+<div class="slider">
+<img src="${img}">
+</div>
+`).join('')}
+</div>
+`;
+  }
 </script>
 
 </body>
