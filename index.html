@@ -474,39 +474,6 @@ document.getElementById('report-body').innerHTML=`
 document.getElementById('report').style.display='block';
 }
 
-let zoomLevel = 1;
-
-function openCert(img){
-document.getElementById('certImage').src = img;
-document.getElementById('certModal').style.display = 'flex';
-zoomLevel = 1;
-applyZoom();
-}
-
-function closeCert(){
-document.getElementById('certModal').style.display = 'none';
-document.getElementById('certImage').src = "";
-}
-
-function zoomIn(){
-zoomLevel += 0.2;
-applyZoom();
-}
-
-function zoomOut(){
-zoomLevel -= 0.2;
-if(zoomLevel < 0.5) zoomLevel = 0.5;
-applyZoom();
-}
-
-function resetZoom(){
-zoomLevel = 1;
-applyZoom();
-}
-
-function applyZoom(){
-document.getElementById('certImage').style.transform = `scale(${zoomLevel})`;
-}
 function closeModal(){document.getElementById('modal').style.display='none';}
 function closeReport(){document.getElementById('report').style.display='none';}
 
