@@ -251,13 +251,6 @@ With hands-on experience in real-world, <B>I turn real-world problems into pract
 <img id="certImage" style="max-width:100%;transition:0.3s;cursor:zoom-in;">
 </div>
 
-<br>
-<div style="text-align:center;">
-<button onclick="zoomIn()">Zoom In</button>
-<button onclick="zoomOut()">Zoom Out</button>
-<button onclick="resetZoom()">Reset</button>
-</div>
-
 </div>
 </div>
 
@@ -474,6 +467,20 @@ document.getElementById('report-body').innerHTML=`
 document.getElementById('report').style.display='block';
 }
 
+let zoomLevel = 1;
+
+function openCert(img){
+document.getElementById('certImage').src = img;
+document.getElementById('certModal').style.display = 'flex';
+zoomLevel = 1;
+applyZoom();
+}
+
+function closeCert(){
+document.getElementById('certModal').style.display = 'none';
+document.getElementById('certImage').src = "";
+}
+  
 function closeModal(){document.getElementById('modal').style.display='none';}
 function closeReport(){document.getElementById('report').style.display='none';}
 
