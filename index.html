@@ -277,15 +277,28 @@ c.appendChild(d);
 
 function openActivity(a){
 document.getElementById('modal').style.display='flex';
+
 document.getElementById('modal-body').innerHTML=`
 <h2>${a.name}</h2>
 <p>${a.story}</p>
 <p><b>Impact:</b> ${a.impact}</p>
 
-<div style="margin-top:15px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;">
-${a.imgs.map(img => `
-<img src="${img}" style="width:100%;border-radius:10px;border:1px solid rgba(255,255,255,0.1)">
-`).join('')}
+<div style="margin-top:20px;">
+
+  <h3 style="color:#38bdf8;margin-bottom:10px;">Before</h3>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:20px;">
+    ${a.gallery.before.map(img => `
+      <img src="${img}" style="width:100%;border-radius:10px;border:1px solid rgba(255,255,255,0.1)">
+    `).join('')}
+  </div>
+
+  <h3 style="color:#38bdf8;margin-bottom:10px;">After</h3>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;">
+    ${a.gallery.after.map(img => `
+      <img src="${img}" style="width:100%;border-radius:10px;border:1px solid rgba(255,255,255,0.1)">
+    `).join('')}
+  </div>
+
 </div>
 `;
 }
