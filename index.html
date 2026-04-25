@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Khairil Anwar | Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#0b1220;
+  --card:rgba(255,255,255,0.05);
+  --accent:#38bdf8;
+  --text:#e5e7eb;
+  --muted:#94a3b8;
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif;}
+body{background:var(--bg);color:var(--text);} 
+
+nav{position:fixed;top:0;width:100%;display:flex;justify-content:space-between;padding:12px 20px;background:rgba(0,0,0,0.4);} 
+nav a{color:var(--muted);margin-left:15px;text-decoration:none;font-size:13px;cursor:pointer;}
+nav a:hover{color:var(--accent);} 
+
+.hero{text-align:center;padding:100px 20px 40px;}
+.hero img{width:120px;height:120px;border-radius:50%;border:2px solid var(--accent);} 
+.hero h1{margin-top:10px;} 
+.hero p{color:var(--muted);} 
+
+.section{max-width:1000px;margin:auto;padding:40px 20px;} 
+.section h2{border-left:4px solid var(--accent);padding-left:10px;margin-bottom:20px;} 
+
+.card{background:var(--card);padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.08);margin-bottom:10px;cursor:pointer;} 
+
+.cert-card{background:var(--card);padding:12px;border-radius:8px;margin-bottom:10px;cursor:pointer;} 
+
+.modal{position:fixed;inset:0;background:rgba(0,0,0,0.95);display:none;justify-content:center;align-items:center;padding:20px;} 
+.modal-content{max-width:900px;width:100%;background:#0b1220;padding:20px;border-radius:12px;position:relative;} 
+.close{position:absolute;top:10px;right:15px;cursor:pointer;font-size:18px;} 
+
+.slider-box{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:15px;} 
+.slider img{width:100%;border-radius:8px;border:1px solid rgba(255,255,255,0.1);} 
+.slider-title{text-align:center;margin-bottom:5px;color:var(--accent);} 
+
+.report{margin-top:20px;display:none;border-top:1px solid rgba(255,255,255,0.1);padding-top:15px;} 
+button{margin-top:10px;background:rgba(255,255,255,0.08);border:none;padding:6px 10px;border-radius:6px;cursor:pointer;} 
+
+</style>
+</head>
+
+<body>
+
+<nav>
+  <div>Portfolio</div>
+  <div>
+    <a href="#about">About</a>
+    <a href="#cases">Cases</a>
+    <a href="#cert">Certs</a>
+    <a href="#social">Activities</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <img src="profile.jpg">
+  <h1>Khairil Anwar</h1>
+  <p>Hardware • Network • Software • IoT</p>
+</section>
+
+<section id="about" class="section">
+  <h2>About Me</h2>
+  <div class="card">
+    <p>Tech-savvy engineer focused on real-world IT, networking, software systems, and IoT automation solutions.</p>
+  </div>
+</section>
+
+<section id="cases" class="section">
+  <h2>Case Studies</h2>
+  <div id="cases-container"></div>
+</section>
+
+<section id="cert" class="section">
+  <h2>Certificates</h2>
+  <div class="cert-card" onclick="openCert('Diploma.jpg')">Diploma</div>
+  <div class="cert-card" onclick="openCert('Bachelor.jpg')">Bachelor Degree</div>
+  <div class="cert-card" onclick="openCert('Master.jpg')">Master Degree</div>
+  <div class="cert-card" onclick="openCert('MBOT-QT.jpg')">MBOT Qualified Technician</div>
+  <div class="cert-card" onclick="openCert('MBOT-GT.jpg')">MBOT Graduate Technologist</div>
+  <div class="cert-card" onclick="openCert('TNB-NT.jpg')">TNB Network Technologies</div>
+  <div class="cert-card" onclick="openCert('HCENT.jpg')">HCENT Certification</div>
+</section>
+
+<section id="social" class="section">
+  <h2>Activities</h2>
+  <div id="social-container"></div>
+</section>
+
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">✖</span>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<div id="certModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeCert()">✖</span>
+    <img id="certImage" style="width:100%;">
+  </div>
+</div>
+
+<script>
+
+const cases = [
+  {category:'hardware',name:'Server PSU Failure',problem:'Server shutdown',fix:'Replace PSU',solution:'System restored',steps:['Check logs','Replace PSU'],tools:'Multimeter',impact:'Uptime restored',before:'img/b1.jpg',after:'img/a1.jpg'},
+  {category:'hardware',name:'Router Overheating',problem:'Random reboot',fix:'Cooling fix',solution:'Stable system',steps:['Clean dust','Thermal paste'],tools:'Thermal sensor',impact:'-25°C',before:'img/b2.jpg',after:'img/a2.jpg'},
+  {category:'network',name:'High Latency ISP',problem:'Slow connection',fix:'Routing optimization',solution:'Faster network',steps:['Trace route','Optimize path'],tools:'MTR',impact:'60% faster',before:'img/b3.jpg',after:'img/a3.jpg'},
+  {category:'software',name:'ERP System Lag',problem:'Slow DB queries',fix:'Index optimization',solution:'Faster ERP',steps:['Analyze SQL','Add indexes'],tools:'SQL Profiler',impact:'70% faster',before:'img/b4.jpg',after:'img/a4.jpg'},
+  {category:'iot',name:'Smart Irrigation',problem:'Manual watering',fix:'Automation',solution:'Auto irrigation',steps:['Install sensor','Relay setup'],tools:'ESP32',impact:'80% water saved',before:'img/b5.jpg',after:'img/a5.jpg'},
+  {category:'iot',name:'Smart Lighting',problem:'Energy waste',fix:'Sensor automation',solution:'Auto lighting',steps:['Install LDR','Program control'],tools:'Arduino',impact:'45% saving',before:'img/b6.jpg',after:'img/a6.jpg'}
+];
+
+const activities=[
+  {
+    name:'Community Tech Workshop',
+    desc:'Hands-on hardware troubleshooting training',
+    story:'Led a community workshop teaching basic hardware diagnosis and repair techniques to students and technicians.',
+    impact:'Improved practical troubleshooting skills for 30+ participants',
+    imgs:['img/social1.jpg','img/social1b.jpg']
+  },
+  {
+    name:'University Tech Talk',
+    desc:'IT problem solving seminar',
+    story:'Shared real-world IT case studies and network troubleshooting methods with university students.',
+    impact:'Increased awareness of real IT industry practices',
+    imgs:['img/social2.jpg']
+  },
+  {
+    name:'Volunteer Repair Program',
+    desc:'Free device repair for community',
+    story:'Provided free repair services for laptops and routers for low-income users.',
+    impact:'Reduced digital device downtime in community',
+    imgs:['img/social3.jpg']
+  },
+  {
+    name:'STEM Outreach',
+    desc:'Teaching electronics to students',
+    story:'Conducted STEM sessions introducing electronics and IoT basics.',
+    impact:'Inspired students into engineering field',
+    imgs:['img/social4.jpg']
+  }
+];
+
+function renderCases(){
+  const c=document.getElementById('cases-container');
+  c.innerHTML='';
+  cases.forEach(i=>{
+    const d=document.createElement('div');
+    d.className='card';
+    d.innerHTML=`<b>${i.name}</b><br><small>${i.problem}</small>`;
+    d.onclick=()=>openModal(i);
+    c.appendChild(d);
+  });
+}
+
+function renderActivities(){
+  const c=document.getElementById('social-container');
+  c.innerHTML='';
+  activities.forEach(a=>{
+    const d=document.createElement('div');
+    d.className='card';
+    d.innerHTML=`<b>${a.name}</b><br><small>${a.desc}</small>`;
+    d.onclick=()=>openActivity(a);
+    c.appendChild(d);
+  });
+}
+
+function openActivity(a){
+  document.getElementById('modal').style.display='flex';
+  document.getElementById('modal-body').innerHTML=`
+    <h2>${a.name}</h2>
+    <p><b>Story:</b> ${a.story}</p>
+    <p><b>Impact:</b> ${a.impact}</p>
+
+    <div class="slider-box">
+      ${a.imgs.map(i=>`
+        <div><img src="${i}" style="width:100%;border-radius:8px;"></div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function openModal(i){
+  document.getElementById('modal').style.display='flex';
+  document.getElementById('modal-body').innerHTML=`
+    <h2>${i.name}</h2>
+    <p><b>Problem:</b> ${i.problem}</p>
+    <p><b>Fix:</b> ${i.fix}</p>
+    <p><b>Solution:</b> ${i.solution}</p>
+
+    <div class="slider-box">
+      <div><div class="slider-title">Before</div><img src="${i.before}"></div>
+      <div><div class="slider-title">After</div><img src="${i.after}"></div>
+    </div>
+
+    <button onclick="toggleReport()">Full Report</button>
+
+    <div id="report" class="report">
+      <ol>${i.steps.map(s=>`<li>${s}</li>`).join('')}</ol>
+      <p><b>Tools:</b> ${i.tools}</p>
+      <p><b>Impact:</b> ${i.impact}</p>
+    </div>
+  `;
+}
+
+function toggleReport(){
+  const r=document.getElementById('report');
+  r.style.display=r.style.display==='block'?'none':'block';
+}
+
+function openCert(i){
+  document.getElementById('certImage').src=i;
+  document.getElementById('certModal').style.display='flex';
+}
+function closeCert(){document.getElementById('certModal').style.display='none';}
+function closeModal(){document.getElementById('modal').style.display='none';}
+
+renderCases();
+renderActivities();
+
+</script>
+
+</body>
+</html>
