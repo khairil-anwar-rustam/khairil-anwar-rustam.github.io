@@ -238,19 +238,19 @@ const cases = [
 ];
 
 const activities = [
-  {
-    name: "Audiovisual System Deployment: Projector and Projection Screen Installation",
-    desc: "Design and implementation of an integrated projection system involving ceiling-mounted projector alignment and projection screen installation for optimized visual display performance in an institutional environment",
-    story: "Conducted systematic site evaluation including projection distance analysis, ceiling-mount structural assessment, precise optical alignment to eliminate keystone distortion, and installation of a projection screen with optimized aspect ratio calibration. Final phase included signal testing, resolution configuration, and image quality optimization for academic presentation environments",
-    impact: "Improved institutional audiovisual infrastructure, enhancing lecture delivery quality and visual clarity for over 50 active users across teaching and presentation sessions",
-    gallery: {      
-        "Activities/beforeprojector.jpg",
-        "Activities/beforeprojector1.jpg"   
-        "Activities/afterprojector.jpg",
-        "Activities/afterprojector1.jpg",
-        "Activities/afterprojector2.jpg"    
-    }
-  }
+{
+name:"Audiovisual System Deployment",
+desc:"Projector installation system",
+story:"Full installation + calibration of projection system.",
+impact:"Improved lecture experience",
+gallery:[
+"Activities/beforeprojector.jpg",
+"Activities/beforeprojector1.jpg",
+"Activities/afterprojector.jpg",
+"Activities/afterprojector1.jpg",
+"Activities/afterprojector2.jpg"
+]
+}
 ];
 
 function renderCases(){
@@ -263,18 +263,35 @@ c.appendChild(d);
 }
 
 function renderActivities(){
-const c=document.getElementById('social-container');c.innerHTML='';
+const c=document.getElementById('social-container');
+c.innerHTML='';
+
 activities.forEach(a=>{
-const d=document.createElement('div');d.className='card';d.innerHTML=`<b>${a.name}</b><br><small>${a.desc}</small>`;
-d.onclick=()=>openActivity(a);
-c.appendChild(d);
+const div=document.createElement('div');
+div.className='card';
+div.innerHTML=`<b>${a.name}</b><br><small>${a.desc}</small>`;
+div.onclick=()=>openActivity(a);
+c.appendChild(div);
 });
 }
 
-function openActivity(a){ document.getElementById('modal').style.display='flex'; 
-document.getElementById('modal-body').innerHTML= 
-<h2>${a.name}</h2> <p>${a.story}</p> 
+function openActivity(a){
+document.getElementById('modal').style.display='flex';
+
+document.getElementById('modal-body').innerHTML=`
+<h2>${a.name}</h2>
+<p>${a.story}</p>
 <p><b>Impact:</b> ${a.impact}</p>
+
+<div class="gallery">
+${a.gallery.map(img=>`<img src="${img}">`).join('')}
+</div>
+`;
+}
+
+function closeModal(){
+document.getElementById('modal').style.display='none';
+}
 
 function openModal(i){
 document.getElementById('modal').style.display='flex';
