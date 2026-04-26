@@ -265,23 +265,27 @@ button{
 <section class="hero">
 <img src="profile.jpg">
 <h1>Khairil Anwar</h1>
-<p>Hardware • Network • Software • IoT</p>
+<p>Hardware • Network • Software • IoT • DIY</p>
 </section>
 
 <section id="about" class="section">
 <h2>About Me</h2>
 <div class="card">
-<p>Tech-savvy personnel focused on real-world IT, networking, software systems, and IoT automation solutions.</p>
+<p>Tech-savvy personnel focused on real-world IT, networking, software systems, and IoT automation solutions.DIY Projects as hobby.</p>
 </div>
 </section>
 
 <section id="cases" class="section">
-<h2>Case Studies</h2>
-<div id="cases-container"></div>
+<h2 onclick="toggleSection(this)">Case Studies</h2>
+<div class="section-content">
+  <div id="cases-container"></div>
+</div>
 </section>
 
 <section id="cert" class="section">
-<h2>Certificates</h2>
+<h2 onclick="toggleSection(this)">Certificates</h2>
+<div class="section-content">
+
 <div class="cert-card" onclick="openCert('Diploma.jpg')">Diploma</div>
 <div class="cert-card" onclick="openCert('Bachelor.jpg')">Bachelor Degree</div>
 <div class="cert-card" onclick="openCert('Master.jpg')">Master Degree</div>
@@ -289,11 +293,15 @@ button{
 <div class="cert-card" onclick="openCert('MBOT-GT.jpg')">MBOT Graduate Technologist</div>
 <div class="cert-card" onclick="openCert('TNB-NT.jpg')">TNB Network Technologies</div>
 <div class="cert-card" onclick="openCert('HCENT.jpg')">HCENT Certification</div>
+
+</div>
 </section>
 
 <section id="social" class="section">
-<h2>Activities</h2>
-<div id="social-container"></div>
+<h2 onclick="toggleSection(this)">Activities</h2>
+<div class="section-content">
+  <div id="social-container"></div>
+</div>
 </section>
 
 <!-- MODALS -->
@@ -500,6 +508,20 @@ function outsideClose(e){
 if(e.target.id === 'modal'){
 closeModal();
 }
+  }
+
+function toggleSection(el){
+  const currentSection = el.parentElement;
+
+  // close all sections
+  document.querySelectorAll('.section').forEach(sec=>{
+    if(sec !== currentSection){
+      sec.classList.remove('active');
+    }
+  });
+
+  // toggle current
+  currentSection.classList.toggle('active');
   }
   
 </script>
