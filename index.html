@@ -212,6 +212,21 @@ button{
   overflow-y:auto;
 }
 
+.gallery-swipe button{
+  background:rgba(0,0,0,0.5);
+  border:none;
+  color:white;
+  font-size:18px;
+  padding:8px 12px;
+  border-radius:50%;
+  cursor:pointer;
+  backdrop-filter:blur(6px);
+}
+
+.gallery-swipe button:hover{
+  background:rgba(56,189,248,0.7);
+  }  
+
 </style>
 </head>
 
@@ -335,8 +350,21 @@ document.getElementById('modal-body').innerHTML=`
 <p>${a.story}</p>
 <p><b>Impact:</b> ${a.impact}</p>
 
-<div class="gallery-swipe">
-<img id="swipeImg" src="${swipeGallery[swipeIndex]}" style="width:100%;border-radius:10px;">
+<div class="gallery-swipe" style="position:relative;">
+  
+  <button onclick="prevSwipe()" 
+    style="position:absolute;left:10px;top:50%;transform:translateY(-50%);z-index:2;">
+    ◀
+  </button>
+
+  <img id="swipeImg" src="${swipeGallery[swipeIndex]}" 
+    style="width:100%;border-radius:10px;">
+
+  <button onclick="nextSwipe()" 
+    style="position:absolute;right:10px;top:50%;transform:translateY(-50%);z-index:2;">
+    ▶
+  </button>
+
 </div>
 `;
 
