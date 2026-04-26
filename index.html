@@ -246,6 +246,17 @@ button{
   transform:scale(1.1);
   box-shadow:0 10px 25px rgba(37,211,102,0.6);
   }
+
+/* ===== ACCORDION FIX ===== */
+.section-content{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height 0.4s ease;
+}
+
+.section.active .section-content{
+  max-height:2000px; /* large enough to expand */
+  }
   
 </style>
 </head>
@@ -433,11 +444,6 @@ document.getElementById('modal').style.display='none';
 document.getElementById('modal-body').innerHTML='';
 }
 
-function outsideClose(e){
-if(e.target.id === 'modal'){
-closeModal();
-}
-}
 
 function openCert(i){
 document.getElementById('certImage').src=i;
