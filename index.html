@@ -444,16 +444,20 @@ else prevSwipe();
 function nextSwipe(){
 if(swipeIndex < swipeGallery.length - 1){
 swipeIndex++;
-updateSwipe();
+}else{
+swipeIndex = 0; // loop to first
 }
+updateSwipe();
 }
 
 function prevSwipe(){
 if(swipeIndex > 0){
 swipeIndex--;
+}else{
+swipeIndex = swipeGallery.length - 1; // loop to last
+}
 updateSwipe();
-}
-}
+  }
 
 function updateSwipe(){
 const img = document.getElementById('swipeImg');
