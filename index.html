@@ -336,8 +336,151 @@ let swipeIndex = 0;
 let swipeGallery = [];
 
 const cases = [
-{category:'hardware',name:'Server PSU Failure',problem:'Server shutdown',fix:'Replace PSU',solution:'System restored',steps:['Check logs','Replace PSU'],tools:'Multimeter',impact:'Uptime restored',before:'img/b1.jpg',after:'img/a1.jpg'},
-{category:'iot',name:'Smart Irrigation',problem:'Manual watering',fix:'Automation',solution:'Auto irrigation',steps:['Install sensor','Relay setup'],tools:'ESP32',impact:'80% water saved',before:'img/b5.jpg',after:'img/a5.jpg'}
+
+{
+category:'hardware',
+name:'Data Center Server Overheating',
+problem:'Frequent shutdown due to thermal spikes',
+fix:'Airflow redesign + fan replacement',
+solution:'Stable temperature under load',
+steps:[
+'Inspect rack airflow direction',
+'Clean dust + replace faulty fans',
+'Reposition server units for airflow balance',
+'Install temperature monitoring'
+],
+tools:'Thermal probe, compressed air, fan kit',
+impact:'Downtime reduced by 95%',
+before:'Cases/b1.jpg',
+after:'Cases/a1.jpg'
+},
+
+{
+category:'network',
+name:'Office Network Intermittent Drop',
+problem:'Random internet disconnections',
+fix:'Faulty switch + loop detection',
+solution:'Stable LAN connectivity',
+steps:[
+'Check switch logs',
+'Identify broadcast storm',
+'Replace faulty switch',
+'Enable STP (Spanning Tree Protocol)'
+],
+tools:'Network tester, managed switch',
+impact:'Zero downtime after fix',
+before:'img/b2.jpg',
+after:'img/a2.jpg'
+},
+
+{
+category:'software',
+name:'POS System Crash During Peak Hours',
+problem:'Application freeze under load',
+fix:'Database optimization',
+solution:'Smooth transaction processing',
+steps:[
+'Analyze query performance',
+'Index database tables',
+'Optimize backend logic',
+'Stress test system'
+],
+tools:'SQL profiler, debugger',
+impact:'Transaction speed improved by 60%',
+before:'img/b3.jpg',
+after:'img/a3.jpg'
+},
+
+{
+category:'iot',
+name:'Smart Energy Monitoring System',
+problem:'No visibility on power usage',
+fix:'IoT sensor deployment',
+solution:'Real-time energy dashboard',
+steps:[
+'Install current sensors',
+'Integrate ESP32 module',
+'Send data to cloud dashboard',
+'Configure alerts'
+],
+tools:'ESP32, sensors, cloud API',
+impact:'Reduced electricity cost by 25%',
+before:'img/b4.jpg',
+after:'img/a4.jpg'
+},
+
+{
+category:'hardware',
+name:'Laptop Motherboard Short Circuit',
+problem:'Device not powering on',
+fix:'Component-level repair',
+solution:'System revived without replacement',
+steps:[
+'Check power rail with multimeter',
+'Locate shorted capacitor',
+'Replace damaged component',
+'Test voltage stability'
+],
+tools:'Multimeter, soldering kit',
+impact:'Saved replacement cost',
+before:'img/b6.jpg',
+after:'img/a6.jpg'
+},
+
+{
+category:'network',
+name:'WiFi Dead Zone in Office',
+problem:'Weak signal in meeting rooms',
+fix:'Access Point optimization',
+solution:'Full coverage across floor',
+steps:[
+'Perform signal heatmap analysis',
+'Relocate AP positions',
+'Adjust channel interference',
+'Add additional AP'
+],
+tools:'WiFi analyzer, AP controller',
+impact:'Signal strength improved to -60dBm',
+before:'img/b7.jpg',
+after:'img/a7.jpg'
+},
+
+{
+category:'iot',
+name:'Automated Smart Irrigation System',
+problem:'Manual watering inefficient',
+fix:'Sensor-based automation',
+solution:'Self-regulated irrigation',
+steps:[
+'Install soil moisture sensors',
+'Configure relay + pump system',
+'Program ESP32 logic',
+'Test scheduling + thresholds'
+],
+tools:'ESP32, relay module, sensors',
+impact:'Water usage reduced by 80%',
+before:'img/b5.jpg',
+after:'img/a5.jpg'
+},
+
+{
+category:'software',
+name:'Website Slow Load Time',
+problem:'High bounce rate due to delay',
+fix:'Frontend + backend optimization',
+solution:'Fast-loading responsive site',
+steps:[
+'Compress images',
+'Minify CSS/JS',
+'Enable caching',
+'Optimize API calls'
+],
+tools:'Chrome DevTools, Lighthouse',
+impact:'Load time reduced from 5s → 1.5s',
+before:'img/b8.jpg',
+after:'img/a8.jpg'
+}
+
 ];
 
 const activities = [
