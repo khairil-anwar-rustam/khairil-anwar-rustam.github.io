@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Khairil Anwar | Portfolio</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
@@ -16,12 +15,7 @@
   --muted:#94a3b8;
 }
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Inter,sans-serif;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif;}
 
 body{
   background:var(--bg);
@@ -33,11 +27,12 @@ body{
 body::before{
   content:"";
   position:fixed;
-  inset:0;
+  top:0;left:0;
+  width:100%;height:100%;
   background:
-    radial-gradient(circle at 20% 20%, rgba(56,189,248,0.18), transparent 40%),
-    radial-gradient(circle at 80% 30%, rgba(99,102,241,0.15), transparent 45%),
-    radial-gradient(circle at 50% 80%, rgba(16,185,129,0.10), transparent 50%);
+  radial-gradient(circle at 20% 20%, rgba(56,189,248,0.18), transparent 40%),
+  radial-gradient(circle at 80% 30%, rgba(99,102,241,0.15), transparent 45%),
+  radial-gradient(circle at 50% 80%, rgba(16,185,129,0.10), transparent 50%);
   z-index:-2;
   animation:moveBg 18s ease-in-out infinite alternate;
 }
@@ -47,54 +42,40 @@ body::before{
   100%{transform:scale(1.1) translateY(-20px);}
 }
 
+body::after{
+  content:"";
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  background-image:
+  linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+  linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size:60px 60px;
+  opacity:0.2;
+  z-index:-1;
+}
+
 /* NAV */
 nav{
-  position:fixed;
-  top:0;
-  width:100%;
-  display:flex;
-  justify-content:space-between;
+  position:fixed;top:0;width:100%;
+  display:flex;justify-content:space-between;
   padding:12px 20px;
   background:rgba(0,0,0,0.35);
   backdrop-filter:blur(14px);
   z-index:100;
 }
-
-nav a{
-  color:var(--muted);
-  margin-left:15px;
-  text-decoration:none;
-  font-size:13px;
-}
-
+nav a{color:var(--muted);margin-left:15px;text-decoration:none;font-size:13px;}
 nav a:hover{color:var(--accent);}
 
 /* HERO */
-.hero{
-  text-align:center;
-  padding:120px 20px 40px;
-}
-
-.hero img{
-  width:120px;
-  height:120px;
-  border-radius:50%;
-  border:2px solid var(--accent);
-}
+.hero{text-align:center;padding:120px 20px 40px;}
+.hero img{width:120px;height:120px;border-radius:50%;border:2px solid var(--accent);}
+.hero h1{margin-top:10px;font-size:28px;}
+.hero p{color:var(--muted);}
 
 /* SECTIONS */
-.section{
-  max-width:1000px;
-  margin:auto;
-  padding:50px 20px;
-}
-
-.section h2{
-  border-left:4px solid var(--accent);
-  padding-left:10px;
-  margin-bottom:20px;
-  cursor:pointer;
-}
+.section{max-width:1000px;margin:auto;padding:50px 20px;}
+.section h2{border-left:4px solid var(--accent);padding-left:10px;margin-bottom:20px;}
 
 /* CARDS */
 .card{
@@ -104,6 +85,16 @@ nav a:hover{color:var(--accent);}
   border:1px solid rgba(255,255,255,0.08);
   margin-bottom:12px;
   cursor:pointer;
+  backdrop-filter:blur(10px);
+}
+
+.cert-card{
+  background:rgba(255,255,255,0.05);
+  padding:14px;
+  margin-bottom:10px;
+  border-radius:10px;
+  cursor:pointer;
+  border:1px solid rgba(255,255,255,0.1);
   backdrop-filter:blur(10px);
 }
 
@@ -126,8 +117,6 @@ nav a:hover{color:var(--accent);}
   padding:20px;
   border-radius:12px;
   position:relative;
-  max-height:90vh;
-  overflow-y:auto;
 }
 
 .close{
@@ -146,26 +135,12 @@ nav a:hover{color:var(--accent);}
   margin-top:15px;
 }
 
-/* GALLERY */
-.gallery{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  margin-top:10px;
-}
-
-/* WHATSAPP */
-.whatsapp{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  background:#25D366;
-  padding:14px;
-  border-radius:50%;
-  color:white;
-  text-decoration:none;
-  font-size:20px;
-  z-index:999;
+.slider img{
+  width:100%;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.1);
+  max-height:260px;
+  object-fit:cover;
 }
 
 /* REPORT */
@@ -176,7 +151,6 @@ nav a:hover{color:var(--accent);}
   padding-top:15px;
 }
 
-/* BUTTON */
 button{
   background:rgba(255,255,255,0.08);
   border:1px solid rgba(255,255,255,0.1);
@@ -187,22 +161,103 @@ button{
   margin-top:10px;
 }
 
-/* =========================
-   🔥 SMOOTH IMAGE LOADING
-========================= */
-img{
-  opacity:0;
-  transform:scale(1.02);
-  filter:blur(8px);
-  transition:opacity 0.6s ease, transform 0.6s ease, filter 0.6s ease;
+/* ===== FIXED GALLERY ===== */
+.gallery{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:10px;
 }
 
-img.loaded{
-  opacity:1;
-  transform:scale(1);
-  filter:blur(0);
+.gallery img{
+  width:100%;
+  max-width:250px;
+  height:180px;
+  object-fit:cover;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.1);
 }
 
+/* MOBILE */
+@media (max-width:600px){
+  .slider-box{
+    grid-template-columns:1fr;
+  }
+
+  .gallery img{
+    max-width:100%;
+    height:auto;
+  }
+}
+
+/* FIX IMAGE RESPONSIVENESS */
+.slider-box img,
+.gallery img{
+  width:100%;
+  height:auto;
+  object-fit:cover;
+  border-radius:10px;
+}
+
+/* SAFE TOUCH SWIPE */
+.gallery-swipe{
+  width:100%;
+  user-select:none;
+  touch-action:pan-y;
+}
+
+/* OPTIONAL: make modal scroll safe */
+.modal-content{
+  max-height:90vh;
+  overflow-y:auto;
+}
+
+.gallery-swipe button{
+  background:rgba(0,0,0,0.5);
+  border:none;
+  color:white;
+  font-size:18px;
+  padding:8px 12px;
+  border-radius:50%;
+  cursor:pointer;
+  backdrop-filter:blur(6px);
+}
+
+.gallery-swipe button:hover{
+  background:rgba(56,189,248,0.7);
+  }  
+
+.whatsapp{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#25D366;
+  padding:14px;
+  border-radius:50%;
+  color:white;
+  text-decoration:none;
+  font-size:20px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.3);
+  z-index:999;
+  transition:0.3s;
+}
+
+.whatsapp:hover{
+  transform:scale(1.1);
+  box-shadow:0 10px 25px rgba(37,211,102,0.6);
+  }
+
+/* ===== ACCORDION FIX ===== */
+.section-content{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height 0.4s ease;
+}
+
+.section.active .section-content{
+  max-height:2000px; /* large enough to expand */
+  }
+  
 </style>
 </head>
 
@@ -219,7 +274,7 @@ img.loaded{
 </nav>
 
 <section class="hero">
-<img src="profile.jpg" loading="lazy">
+<img src="profile.jpg">
 <h1>Khairil Anwar</h1>
 <p>Hardware • Network • Software • IoT • DIY</p>
 </section>
@@ -227,32 +282,40 @@ img.loaded{
 <section id="about" class="section">
 <h2>About Me</h2>
 <div class="card">
-Tech-savvy personnel focused on IT, networking, software systems & IoT solutions.
+<p>Tech-savvy personnel focused on real-world IT, networking, software systems, and IoT automation solutions. DIY Projects as hobby.</p>
 </div>
 </section>
 
 <section id="cases" class="section">
 <h2 onclick="toggleSection(this)">Case Studies</h2>
 <div class="section-content">
-<div id="cases-container"></div>
+  <div id="cases-container"></div>
 </div>
 </section>
 
 <section id="cert" class="section">
-<h2>Certificates</h2>
-<div class="card" onclick="openCert('Certs/Diploma.jpg')">Diploma</div>
-<div class="card" onclick="openCert('Certs/Bachelor.jpg')">Bachelor</div>
-<div class="card" onclick="openCert('Certs/Master.jpg')">Master</div>
+<h2 onclick="toggleSection(this)">Certificates</h2>
+<div class="section-content">
+
+<div class="cert-card" onclick="openCert('Certs/Diploma.jpg')">Diploma</div>
+<div class="cert-card" onclick="openCert('Certs/Bachelor.jpg')">Bachelor Degree</div>
+<div class="cert-card" onclick="openCert('Certs/Master.jpg')">Master Degree</div>
+<div class="cert-card" onclick="openCert('Certs/MBOT-QT.jpg')">MBOT Qualified Technician</div>
+<div class="cert-card" onclick="openCert('Certs/MBOT-GT.jpg')">MBOT Graduate Technologist</div>
+<div class="cert-card" onclick="openCert('Certs/TNB-NT.jpg')">TNB Network Technologies</div>
+<div class="cert-card" onclick="openCert('Certs/HCENT.jpg')">HCENT Certification</div>
+
+</div>
 </section>
 
 <section id="social" class="section">
 <h2 onclick="toggleSection(this)">Activities</h2>
 <div class="section-content">
-<div id="social-container"></div>
+  <div id="social-container"></div>
 </div>
 </section>
 
-<!-- MODAL -->
+<!-- MODALS -->
 <div id="modal" class="modal" onclick="outsideClose(event)">
 <div class="modal-content">
 <span class="close" onclick="closeModal()">✖</span>
@@ -263,67 +326,232 @@ Tech-savvy personnel focused on IT, networking, software systems & IoT solutions
 <div id="certModal" class="modal">
 <div class="modal-content">
 <span class="close" onclick="closeCert()">✖</span>
-<img id="certImage">
+<img id="certImage" style="width:100%;">
 </div>
 </div>
-
-<a class="whatsapp" href="https://wa.me/60134570863" target="_blank">💬</a>
 
 <script>
 
-/* ======================
-   DATA (shortened)
-====================== */
+let swipeIndex = 0;
+let swipeGallery = [];
 
-const cases = [{
-name:"Network Issue",
-problem:"Internet drop",
-before:"img/b2.jpg",
-after:"img/a2.jpg",
-steps:["Check switch","Replace cable"],
-tools:"Tester",
-impact:"Stable network"
-}];
+const cases = [
 
-const activities = [{
-name:"Project Deployment",
-desc:"AV System",
-story:"Installed projector",
-impact:"Better learning",
-gallery:["Activities/1.jpg","Activities/2.jpg"]
-}];
+{
+category:'hardware',
+name:'Data Center Server Overheating',
+problem:'Frequent shutdown due to thermal spikes',
+fix:'Airflow redesign + fan replacement',
+solution:'Stable temperature under load',
+steps:[
+'Inspect rack airflow direction',
+'Clean dust + replace faulty fans',
+'Reposition server units for airflow balance',
+'Install temperature monitoring'
+],
+tools:'Thermal probe, compressed air, fan kit',
+impact:'Downtime reduced by 95%',
+before:'Cases/b1.jpg',
+after:'Cases/a1.jpg'
+},
 
-/* ======================
-   RENDER
-====================== */
+{
+category:'network',
+name:'Office Network Intermittent Drop',
+problem:'Random internet disconnections',
+fix:'Faulty switch + loop detection',
+solution:'Stable LAN connectivity',
+steps:[
+'Check switch logs',
+'Identify broadcast storm',
+'Replace faulty switch',
+'Enable STP (Spanning Tree Protocol)'
+],
+tools:'Network tester, managed switch',
+impact:'Zero downtime after fix',
+before:'img/b2.jpg',
+after:'img/a2.jpg'
+},
+
+{
+category:'software',
+name:'POS System Crash During Peak Hours',
+problem:'Application freeze under load',
+fix:'Database optimization',
+solution:'Smooth transaction processing',
+steps:[
+'Analyze query performance',
+'Index database tables',
+'Optimize backend logic',
+'Stress test system'
+],
+tools:'SQL profiler, debugger',
+impact:'Transaction speed improved by 60%',
+before:'img/b3.jpg',
+after:'img/a3.jpg'
+},
+
+{
+category:'iot',
+name:'Smart Energy Monitoring System',
+problem:'No visibility on power usage',
+fix:'IoT sensor deployment',
+solution:'Real-time energy dashboard',
+steps:[
+'Install current sensors',
+'Integrate ESP32 module',
+'Send data to cloud dashboard',
+'Configure alerts'
+],
+tools:'ESP32, sensors, cloud API',
+impact:'Reduced electricity cost by 25%',
+before:'img/b4.jpg',
+after:'img/a4.jpg'
+},
+
+{
+category:'hardware',
+name:'Laptop Motherboard Short Circuit',
+problem:'Device not powering on',
+fix:'Component-level repair',
+solution:'System revived without replacement',
+steps:[
+'Check power rail with multimeter',
+'Locate shorted capacitor',
+'Replace damaged component',
+'Test voltage stability'
+],
+tools:'Multimeter, soldering kit',
+impact:'Saved replacement cost',
+before:'img/b6.jpg',
+after:'img/a6.jpg'
+},
+
+{
+category:'network',
+name:'WiFi Dead Zone in Office',
+problem:'Weak signal in meeting rooms',
+fix:'Access Point optimization',
+solution:'Full coverage across floor',
+steps:[
+'Perform signal heatmap analysis',
+'Relocate AP positions',
+'Adjust channel interference',
+'Add additional AP'
+],
+tools:'WiFi analyzer, AP controller',
+impact:'Signal strength improved to -60dBm',
+before:'img/b7.jpg',
+after:'img/a7.jpg'
+},
+
+{
+category:'iot',
+name:'Automated Smart Irrigation System',
+problem:'Manual watering inefficient',
+fix:'Sensor-based automation',
+solution:'Self-regulated irrigation',
+steps:[
+'Install soil moisture sensors',
+'Configure relay + pump system',
+'Program ESP32 logic',
+'Test scheduling + thresholds'
+],
+tools:'ESP32, relay module, sensors',
+impact:'Water usage reduced by 80%',
+before:'img/b5.jpg',
+after:'img/a5.jpg'
+},
+
+{
+category:'software',
+name:'Website Slow Load Time',
+problem:'High bounce rate due to delay',
+fix:'Frontend + backend optimization',
+solution:'Fast-loading responsive site',
+steps:[
+'Compress images',
+'Minify CSS/JS',
+'Enable caching',
+'Optimize API calls'
+],
+tools:'Chrome DevTools, Lighthouse',
+impact:'Load time reduced from 5s → 1.5s',
+before:'img/b8.jpg',
+after:'img/a8.jpg'
+}
+
+];
+
+const activities = [
+{
+name:"Audiovisual System Deployment",
+desc:"Class Projector installation",
+story:"Full installation + calibration of projection system.",
+impact:"Improved lecture experience",
+gallery:[
+"Activities/IMG_20251111_095729_875.jpg",
+"Activities/IMG_20251111_095719_693.jpg",
+"Activities/IMG_20251111_175326_879.jpg",
+"Activities/IMG_20251111_175337_470.jpg",
+"Activities/IMG_20251111_180453_366.jpg"
+]
+}
+];
 
 function renderCases(){
 const c=document.getElementById('cases-container');
 cases.forEach(i=>{
 const d=document.createElement('div');
 d.className='card';
-d.innerHTML=`${i.name}<br><small>${i.problem}</small>`;
+d.innerHTML=`<b>${i.name}</b><br><small>${i.problem}</small>`;
 d.onclick=()=>openModal(i);
 c.appendChild(d);
 });
-smoothImages();
 }
 
 function renderActivities(){
 const c=document.getElementById('social-container');
 activities.forEach(a=>{
-const d=document.createElement('div');
-d.className='card';
-d.innerHTML=`${a.name}<br><small>${a.desc}</small>`;
-d.onclick=()=>openActivity(a);
-c.appendChild(d);
+const div=document.createElement('div');
+div.className='card';
+div.innerHTML=`<b>${a.name}</b><br><small>${a.desc}</small>`;
+div.onclick=()=>openActivity(a);
+c.appendChild(div);
 });
-smoothImages();
 }
 
-/* ======================
-   MODALS
-====================== */
+function openActivity(a){
+document.getElementById('modal').style.display='flex';
+
+swipeGallery = a.gallery;
+swipeIndex = 0;
+
+document.getElementById('modal-body').innerHTML=`
+<h2>${a.name}</h2>
+<p>${a.story}</p>
+<p><b>Impact:</b> ${a.impact}</p>
+
+<div class="gallery-swipe" style="position:relative;">
+  
+  <button onclick="prevSwipe()" 
+    style="position:absolute;left:10px;top:50%;transform:translateY(-50%);z-index:2;">
+    ◀
+  </button>
+
+  <img id="swipeImg" src="${swipeGallery[swipeIndex]}" 
+    style="width:100%;border-radius:10px;">
+
+  <button onclick="nextSwipe()" 
+    style="position:absolute;right:10px;top:50%;transform:translateY(-50%);z-index:2;">
+    ▶
+  </button>
+
+</div>
+`;
+
+enableSwipe();
+  }
 
 function openModal(i){
 document.getElementById('modal').style.display='flex';
@@ -333,38 +561,32 @@ document.getElementById('modal-body').innerHTML=`
 <p>${i.problem}</p>
 
 <div class="slider-box">
-<img src="${i.before}" loading="lazy">
-<img src="${i.after}" loading="lazy">
+<div><img src="${i.before}"></div>
+<div><img src="${i.after}"></div>
 </div>
 
-<button onclick="toggleReport()">Report</button>
+<button onclick="toggleReport()">Full Report</button>
 
 <div id="report" class="report">
-${i.steps.map(s=>`<li>${s}</li>`).join('')}
+<ol>${i.steps.map(s=>`<li>${s}</li>`).join('')}</ol>
+<p><b>Tools:</b> ${i.tools}</p>
+<p><b>Impact:</b> ${i.impact}</p>
 </div>
 `;
-
-setTimeout(smoothImages,100);
 }
 
-function openActivity(a){
-document.getElementById('modal').style.display='flex';
-
-document.getElementById('modal-body').innerHTML=`
-<h2>${a.name}</h2>
-<p>${a.story}</p>
-
-<div class="gallery">
-${a.gallery.map(g=>`<img src="${g}" loading="lazy">`).join('')}
-</div>
-`;
-
-setTimeout(smoothImages,100);
+function toggleReport(){
+const r=document.querySelector('#report');
+if(!r) return;
+r.style.display = r.style.display === 'block' ? 'none' : 'block';
 }
 
+/* FIX: close modal */
 function closeModal(){
 document.getElementById('modal').style.display='none';
+document.getElementById('modal-body').innerHTML='';
 }
+
 
 function openCert(i){
 document.getElementById('certImage').src=i;
@@ -375,54 +597,89 @@ function closeCert(){
 document.getElementById('certModal').style.display='none';
 }
 
-/* ======================
-   REPORT
-====================== */
+function enableSwipe(){
+const img = document.getElementById('swipeImg');
+if(!img) return;
 
-function toggleReport(){
-const r=document.getElementById('report');
-if(r) r.style.display = r.style.display==='block'?'none':'block';
+let startX = 0;
+
+img.ontouchstart = (e)=>{
+startX = e.touches[0].clientX;
+};
+
+img.ontouchend = (e)=>{
+let endX = e.changedTouches[0].clientX;
+let diff = startX - endX;
+
+if(Math.abs(diff) < 50) return;
+
+if(diff > 0) nextSwipe();
+else prevSwipe();
+};
 }
 
-/* ======================
-   IMAGE LOADING FIX
-====================== */
-
-function smoothImages(){
-document.querySelectorAll("img").forEach(img=>{
-if(img.complete){
-img.classList.add("loaded");
+function nextSwipe(){
+if(swipeIndex < swipeGallery.length - 1){
+swipeIndex++;
 }else{
-img.onload=()=>img.classList.add("loaded");
+swipeIndex = 0; // loop to first
 }
-});
-}
-
-/* ======================
-   UTIL
-====================== */
-
-function toggleSection(el){
-el.parentElement.classList.toggle('active');
+updateSwipe();
 }
 
-function outsideClose(e){
-if(e.target.id==='modal') closeModal();
+function prevSwipe(){
+if(swipeIndex > 0){
+swipeIndex--;
+}else{
+swipeIndex = swipeGallery.length - 1; // loop to last
 }
+updateSwipe();
+  }
 
-document.addEventListener('keydown',e=>{
-if(e.key==="Escape"){
+function updateSwipe(){
+const img = document.getElementById('swipeImg');
+if(img){
+img.src = swipeGallery[swipeIndex];
+}
+  }
+
+renderCases();
+renderActivities();
+
+document.addEventListener('keydown', function(e){
+if(e.key === "Escape"){
 closeModal();
 closeCert();
 }
 });
 
-/* INIT */
-renderCases();
-renderActivities();
-setTimeout(smoothImages,100);
+function outsideClose(e){
+if(e.target.id === 'modal'){
+closeModal();
+}
+  }
 
+function toggleSection(el){
+  const currentSection = el.parentElement;
+
+  // close all sections
+  document.querySelectorAll('.section').forEach(sec=>{
+    if(sec !== currentSection){
+      sec.classList.remove('active');
+    }
+  });
+
+  // toggle current
+  currentSection.classList.toggle('active');
+  }
+  
 </script>
-
+<a class="whatsapp" 
+   href="https://wa.me/60134570863?text=Hello%20Khairil%2C%20I%20found%20your%20portfolio%20and%20would%20like%20to%20connect." 
+   target="_blank">
+💬
+  </a>
 </body>
   </html>
+
+
