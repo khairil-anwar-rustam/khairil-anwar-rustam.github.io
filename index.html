@@ -531,17 +531,48 @@ setTimeout(smoothImages,100);
 }
 
 function openActivity(a){
-document.getElementById('modal').style.display='flex';
-document.getElementById('modal-body').innerHTML=`
-<h2>${a.name}</h2>
-<p>${a.story}</p>
-<div class="gallery">
-${a.gallery.map(g=>`<img src="${g}" loading="lazy">`).join('')}
-</div>
-`;
-setTimeout(smoothImages,100);
-}
+  document.getElementById('modal').style.display='flex';
 
+  swipeGallery = a.gallery;
+  swipeIndex = 0;
+
+  document.getElementById('modal-body').innerHTML=`
+    <h2>${a.name}</h2>
+    <p>${a.story}</p>
+    <p><b>Impact:</b> ${a.impact}</p>
+
+    <div class="gallery-swipe" style="position:relative;">
+
+      <button onclick="prevSwipe()" 
+        style="position:absolute;left:10px;top:50%;transform:translateY(-50%);z-index:2;">
+        ◀
+      </button>
+
+      <img id="swipeImg"
+           src="${swipeGallery[0]}"
+           style="width:100%;border-radius:10px;">
+
+      <button onclick="nextSwipe()" 
+        style="position:absolute;right:10px;top:50%;transform:translateY(-50%);z-index:2;">
+        ▶
+      </button>
+
+    </div>
+  `;
+
+  setTimeout(()=>{
+    smoothImages();
+    enableSwipe();
+  },100);
+  }
+
+function updateSwipe(){
+const img = document.getElementById('swipeImg');
+if(img && swipeGallery.length){
+img.src = swipeGallery[swipeIndex];
+}
+  }
+  
 /* OTHER FUNCTIONS (UNCHANGED) */
 
 function closeModal(){
@@ -558,8 +589,18 @@ document.getElementById('certModal').style.display='none';
 }
 
 function toggleSection(el){
-el.parentElement.classList.toggle('active');
-}
+  const currentSection = el.parentElement;
+
+  // CLOSE ALL OTHER SECTIONS FIRST
+  document.querySelectorAll('.section').forEach(sec=>{
+    if(sec !== currentSection){
+      sec.classList.remove('active');
+    }
+  });
+
+  // TOGGLE CURRENT SECTION
+  currentSection.classList.toggle('active');
+  }
 
 function outsideClose(e){
 if(e.target.id==='modal') closeModal();
