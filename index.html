@@ -135,6 +135,14 @@ nav a:hover{color:var(--accent);}
   margin-top:15px;
 }
 
+.slider img{
+  width:100%;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.1);
+  max-height:260px;
+  object-fit:cover;
+}
+
 /* REPORT */
 .report{
   margin-top:15px;
@@ -172,29 +180,53 @@ button{
 
 /* MOBILE */
 @media (max-width:600px){
-  .slider-box{grid-template-columns:1fr;}
-  .gallery img{max-width:100%;height:auto;}
+  .slider-box{
+    grid-template-columns:1fr;
+  }
+
+  .gallery img{
+    max-width:100%;
+    height:auto;
+  }
 }
 
-/* =========================
-   🔥 IMAGE SMOOTH LOADING (ADDED ONLY)
-========================= */
-
-img{
-  opacity:0;
-  transform:scale(1.02);
-  filter:blur(10px);
-  transition:opacity 0.6s ease, transform 0.6s ease, filter 0.6s ease;
-  will-change:opacity, transform, filter;
+/* FIX IMAGE RESPONSIVENESS */
+.slider-box img,
+.gallery img{
+  width:100%;
+  height:auto;
+  object-fit:cover;
+  border-radius:10px;
 }
 
-img.loaded{
-  opacity:1;
-  transform:scale(1);
-  filter:blur(0);
+/* SAFE TOUCH SWIPE */
+.gallery-swipe{
+  width:100%;
+  user-select:none;
+  touch-action:pan-y;
 }
 
-/* WHATSAPP */
+/* OPTIONAL: make modal scroll safe */
+.modal-content{
+  max-height:90vh;
+  overflow-y:auto;
+}
+
+.gallery-swipe button{
+  background:rgba(0,0,0,0.5);
+  border:none;
+  color:white;
+  font-size:18px;
+  padding:8px 12px;
+  border-radius:50%;
+  cursor:pointer;
+  backdrop-filter:blur(6px);
+}
+
+.gallery-swipe button:hover{
+  background:rgba(56,189,248,0.7);
+  }  
+
 .whatsapp{
   position:fixed;
   bottom:20px;
@@ -213,9 +245,9 @@ img.loaded{
 .whatsapp:hover{
   transform:scale(1.1);
   box-shadow:0 10px 25px rgba(37,211,102,0.6);
-}
+  }
 
-/* ACCORDION */
+/* ===== ACCORDION FIX ===== */
 .section-content{
   max-height:0;
   overflow:hidden;
@@ -223,9 +255,9 @@ img.loaded{
 }
 
 .section.active .section-content{
-  max-height:2000px;
-}
-
+  max-height:2000px; /* large enough to expand */
+  }
+  
 </style>
 </head>
 
@@ -242,7 +274,7 @@ img.loaded{
 </nav>
 
 <section class="hero">
-<img src="profile.jpg" loading="lazy">
+<img src="profile.jpg">
 <h1>Khairil Anwar</h1>
 <p>Hardware • Network • Software • IoT • DIY</p>
 </section>
@@ -294,184 +326,20 @@ img.loaded{
 <div id="certModal" class="modal">
 <div class="modal-content">
 <span class="close" onclick="closeCert()">✖</span>
-<img id="certImage" style="width:100%;" loading="lazy">
+<img id="certImage" style="width:100%;">
 </div>
 </div>
-
-<a class="whatsapp" 
-   href="https://wa.me/60134570863?text=Hello%20Khairil%2C%20I%20found%20your%20portfolio%20and%20would%20like%20to%20connect." 
-   target="_blank">💬</a>
 
 <script>
-
-/* ======================
-   IMAGE LOADING SYSTEM (ADDED ONLY)
-====================== */
-
-function smoothImages(){
-  document.querySelectorAll("img").forEach(img=>{
-    if(img.complete){
-      img.classList.add("loaded");
-    }else{
-      img.onload = () => img.classList.add("loaded");
-    }
-  });
-}
-
-/* ======================
-   YOUR ORIGINAL LOGIC (UNCHANGED)
-====================== */
 
 let swipeIndex = 0;
 let swipeGallery = [];
 
 const cases = [
-
-{
-category:'hardware',
-name:'Data Center Server Overheating',
-problem:'Frequent shutdown due to thermal spikes',
-fix:'Airflow redesign + fan replacement',
-solution:'Stable temperature under load',
-steps:[
-'Inspect rack airflow direction',
-'Clean dust + replace faulty fans',
-'Reposition server units for airflow balance',
-'Install temperature monitoring'
-],
-tools:'Thermal probe, compressed air, fan kit',
-impact:'Downtime reduced by 95%',
-before:'Cases/b1.jpg',
-after:'Cases/a1.jpg'
-},
-
-{
-category:'network',
-name:'Office Network Intermittent Drop',
-problem:'Random internet disconnections',
-fix:'Faulty switch + loop detection',
-solution:'Stable LAN connectivity',
-steps:[
-'Check switch logs',
-'Identify broadcast storm',
-'Replace faulty switch',
-'Enable STP (Spanning Tree Protocol)'
-],
-tools:'Network tester, managed switch',
-impact:'Zero downtime after fix',
-before:'img/b2.jpg',
-after:'img/a2.jpg'
-},
-
-{
-category:'software',
-name:'POS System Crash During Peak Hours',
-problem:'Application freeze under load',
-fix:'Database optimization',
-solution:'Smooth transaction processing',
-steps:[
-'Analyze query performance',
-'Index database tables',
-'Optimize backend logic',
-'Stress test system'
-],
-tools:'SQL profiler, debugger',
-impact:'Transaction speed improved by 60%',
-before:'img/b3.jpg',
-after:'img/a3.jpg'
-},
-
-{
-category:'iot',
-name:'Smart Energy Monitoring System',
-problem:'No visibility on power usage',
-fix:'IoT sensor deployment',
-solution:'Real-time energy dashboard',
-steps:[
-'Install current sensors',
-'Integrate ESP32 module',
-'Send data to cloud dashboard',
-'Configure alerts'
-],
-tools:'ESP32, sensors, cloud API',
-impact:'Reduced electricity cost by 25%',
-before:'img/b4.jpg',
-after:'img/a4.jpg'
-},
-
-{
-category:'hardware',
-name:'Laptop Motherboard Short Circuit',
-problem:'Device not powering on',
-fix:'Component-level repair',
-solution:'System revived without replacement',
-steps:[
-'Check power rail with multimeter',
-'Locate shorted capacitor',
-'Replace damaged component',
-'Test voltage stability'
-],
-tools:'Multimeter, soldering kit',
-impact:'Saved replacement cost',
-before:'img/b6.jpg',
-after:'img/a6.jpg'
-},
-
-{
-category:'network',
-name:'WiFi Dead Zone in Office',
-problem:'Weak signal in meeting rooms',
-fix:'Access Point optimization',
-solution:'Full coverage across floor',
-steps:[
-'Perform signal heatmap analysis',
-'Relocate AP positions',
-'Adjust channel interference',
-'Add additional AP'
-],
-tools:'WiFi analyzer, AP controller',
-impact:'Signal strength improved to -60dBm',
-before:'img/b7.jpg',
-after:'img/a7.jpg'
-},
-
-{
-category:'iot',
-name:'Automated Smart Irrigation System',
-problem:'Manual watering inefficient',
-fix:'Sensor-based automation',
-solution:'Self-regulated irrigation',
-steps:[
-'Install soil moisture sensors',
-'Configure relay + pump system',
-'Program ESP32 logic',
-'Test scheduling + thresholds'
-],
-tools:'ESP32, relay module, sensors',
-impact:'Water usage reduced by 80%',
-before:'img/b5.jpg',
-after:'img/a5.jpg'
-},
-
-{
-category:'software',
-name:'Website Slow Load Time',
-problem:'High bounce rate due to delay',
-fix:'Frontend + backend optimization',
-solution:'Fast-loading responsive site',
-steps:[
-'Compress images',
-'Minify CSS/JS',
-'Enable caching',
-'Optimize API calls'
-],
-tools:'Chrome DevTools, Lighthouse',
-impact:'Load time reduced from 5s → 1.5s',
-before:'img/b8.jpg',
-after:'img/a8.jpg'
-}
+{category:'hardware',name:'Server PSU Failure',problem:'Server shutdown',fix:'Replace PSU',solution:'System restored',steps:['Check logs','Replace PSU'],tools:'Multimeter',impact:'Uptime restored',before:'img/b1.jpg',after:'img/a1.jpg'},
+{category:'iot',name:'Smart Irrigation',problem:'Manual watering',fix:'Automation',solution:'Auto irrigation',steps:['Install sensor','Relay setup'],tools:'ESP32',impact:'80% water saved',before:'img/b5.jpg',after:'img/a5.jpg'}
 ];
-  
+
 const activities = [
 {
 name:"Audiovisual System Deployment",
@@ -497,87 +365,85 @@ d.innerHTML=`<b>${i.name}</b><br><small>${i.problem}</small>`;
 d.onclick=()=>openModal(i);
 c.appendChild(d);
 });
-smoothImages();
 }
 
 function renderActivities(){
 const c=document.getElementById('social-container');
 activities.forEach(a=>{
-const d=document.createElement('div');
-d.className='card';
-d.innerHTML=`<b>${a.name}</b><br><small>${a.desc}</small>`;
-d.onclick=()=>openActivity(a);
-c.appendChild(d);
+const div=document.createElement('div');
+div.className='card';
+div.innerHTML=`<b>${a.name}</b><br><small>${a.desc}</small>`;
+div.onclick=()=>openActivity(a);
+c.appendChild(div);
 });
-smoothImages();
-}
-
-/* MODAL (UNCHANGED) */
-function openModal(i){
-document.getElementById('modal').style.display='flex';
-document.getElementById('modal-body').innerHTML=`
-<h2>${i.name}</h2>
-<p>${i.problem}</p>
-<div class="slider-box">
-<img src="${i.before}" loading="lazy">
-<img src="${i.after}" loading="lazy">
-</div>
-<button onclick="toggleReport()">Full Report</button>
-<div id="report" class="report">
-<ol>${i.steps.map(s=>`<li>${s}</li>`).join('')}</ol>
-</div>
-`;
-setTimeout(smoothImages,100);
 }
 
 function openActivity(a){
-  document.getElementById('modal').style.display='flex';
+document.getElementById('modal').style.display='flex';
 
-  swipeGallery = a.gallery;
-  swipeIndex = 0;
+swipeGallery = a.gallery;
+swipeIndex = 0;
 
-  document.getElementById('modal-body').innerHTML=`
-    <h2>${a.name}</h2>
-    <p>${a.story}</p>
-    <p><b>Impact:</b> ${a.impact}</p>
+document.getElementById('modal-body').innerHTML=`
+<h2>${a.name}</h2>
+<p>${a.story}</p>
+<p><b>Impact:</b> ${a.impact}</p>
 
-    <div class="gallery-swipe" style="position:relative;">
-
-      <button onclick="prevSwipe()" 
-        style="position:absolute;left:10px;top:50%;transform:translateY(-50%);z-index:2;">
-        ◀
-      </button>
-
-      <img id="swipeImg"
-           src="${swipeGallery[0]}"
-           style="width:100%;border-radius:10px;">
-
-      <button onclick="nextSwipe()" 
-        style="position:absolute;right:10px;top:50%;transform:translateY(-50%);z-index:2;">
-        ▶
-      </button>
-
-    </div>
-  `;
-
-  setTimeout(()=>{
-    smoothImages();
-    enableSwipe();
-  },100);
-  }
-
-function updateSwipe(){
-const img = document.getElementById('swipeImg');
-if(img && swipeGallery.length){
-img.src = swipeGallery[swipeIndex];
-}
-  }
+<div class="gallery-swipe" style="position:relative;">
   
-/* OTHER FUNCTIONS (UNCHANGED) */
+  <button onclick="prevSwipe()" 
+    style="position:absolute;left:10px;top:50%;transform:translateY(-50%);z-index:2;">
+    ◀
+  </button>
 
+  <img id="swipeImg" src="${swipeGallery[swipeIndex]}" 
+    style="width:100%;border-radius:10px;">
+
+  <button onclick="nextSwipe()" 
+    style="position:absolute;right:10px;top:50%;transform:translateY(-50%);z-index:2;">
+    ▶
+  </button>
+
+</div>
+`;
+
+enableSwipe();
+  }
+
+function openModal(i){
+document.getElementById('modal').style.display='flex';
+
+document.getElementById('modal-body').innerHTML=`
+<h2>${i.name}</h2>
+<p>${i.problem}</p>
+
+<div class="slider-box">
+<div><img src="${i.before}"></div>
+<div><img src="${i.after}"></div>
+</div>
+
+<button onclick="toggleReport()">Full Report</button>
+
+<div id="report" class="report">
+<ol>${i.steps.map(s=>`<li>${s}</li>`).join('')}</ol>
+<p><b>Tools:</b> ${i.tools}</p>
+<p><b>Impact:</b> ${i.impact}</p>
+</div>
+`;
+}
+
+function toggleReport(){
+const r=document.querySelector('#report');
+if(!r) return;
+r.style.display = r.style.display === 'block' ? 'none' : 'block';
+}
+
+/* FIX: close modal */
 function closeModal(){
 document.getElementById('modal').style.display='none';
+document.getElementById('modal-body').innerHTML='';
 }
+
 
 function openCert(i){
 document.getElementById('certImage').src=i;
@@ -588,37 +454,87 @@ function closeCert(){
 document.getElementById('certModal').style.display='none';
 }
 
+function enableSwipe(){
+const img = document.getElementById('swipeImg');
+if(!img) return;
+
+let startX = 0;
+
+img.ontouchstart = (e)=>{
+startX = e.touches[0].clientX;
+};
+
+img.ontouchend = (e)=>{
+let endX = e.changedTouches[0].clientX;
+let diff = startX - endX;
+
+if(Math.abs(diff) < 50) return;
+
+if(diff > 0) nextSwipe();
+else prevSwipe();
+};
+}
+
+function nextSwipe(){
+if(swipeIndex < swipeGallery.length - 1){
+swipeIndex++;
+}else{
+swipeIndex = 0; // loop to first
+}
+updateSwipe();
+}
+
+function prevSwipe(){
+if(swipeIndex > 0){
+swipeIndex--;
+}else{
+swipeIndex = swipeGallery.length - 1; // loop to last
+}
+updateSwipe();
+  }
+
+function updateSwipe(){
+const img = document.getElementById('swipeImg');
+if(img){
+img.src = swipeGallery[swipeIndex];
+}
+  }
+
+renderCases();
+renderActivities();
+
+document.addEventListener('keydown', function(e){
+if(e.key === "Escape"){
+closeModal();
+closeCert();
+}
+});
+
+function outsideClose(e){
+if(e.target.id === 'modal'){
+closeModal();
+}
+  }
+
 function toggleSection(el){
   const currentSection = el.parentElement;
 
-  // CLOSE ALL OTHER SECTIONS FIRST
+  // close all sections
   document.querySelectorAll('.section').forEach(sec=>{
     if(sec !== currentSection){
       sec.classList.remove('active');
     }
   });
 
-  // TOGGLE CURRENT SECTION
+  // toggle current
   currentSection.classList.toggle('active');
   }
-
-function outsideClose(e){
-if(e.target.id==='modal') closeModal();
-}
-
-document.addEventListener('keydown',e=>{
-if(e.key==="Escape"){
-closeModal();
-closeCert();
-}
-});
-
-/* INIT */
-renderCases();
-renderActivities();
-setTimeout(smoothImages,100);
-
+  
 </script>
-
+<a class="whatsapp" 
+   href="https://wa.me/60134570863?text=Hello%20Khairil%2C%20I%20found%20your%20portfolio%20and%20would%20like%20to%20connect." 
+   target="_blank">
+💬
+  </a>
 </body>
   </html>
