@@ -257,6 +257,17 @@ button{
 .section.active .section-content{
   max-height:2000px; /* large enough to expand */
   }
+
+img{
+  opacity:0;
+  transition:opacity 0.4s ease, filter 0.4s ease;
+  filter:blur(10px);
+}
+
+img.loaded{
+  opacity:1;
+  filter:blur(0);
+}
   
 </style>
 </head>
@@ -274,7 +285,7 @@ button{
 </nav>
 
 <section class="hero">
-<img src="profile.jpg">
+<img src="profile.jpg" loading="eager" fetchpriority="high" decoding="async">
 <h1>Khairil Anwar</h1>
 <p>Hardware • Network • Software • IoT • DIY</p>
 </section>
@@ -326,7 +337,7 @@ button{
 <div id="certModal" class="modal">
 <div class="modal-content">
 <span class="close" onclick="closeCert()">✖</span>
-<img id="certImage" style="width:100%;">
+<img id="certImage" loading="lazy" decoding="async" style="width:100%;">
 </div>
 </div>
 
@@ -396,8 +407,8 @@ document.getElementById('modal-body').innerHTML=`
     ◀
   </button>
 
-  <img id="swipeImg" src="${swipeGallery[swipeIndex]}" 
-    style="width:100%;border-radius:10px;">
+  <img id="swipeImg" src="${swipeGallery[swipeIndex]}" loading="lazy" decoding="async"
+style="width:100%;border-radius:10px;">
 
   <button onclick="nextSwipe()" 
     style="position:absolute;right:10px;top:50%;transform:translateY(-50%);z-index:2;">
@@ -418,8 +429,8 @@ document.getElementById('modal-body').innerHTML=`
 <p>${i.problem}</p>
 
 <div class="slider-box">
-<div><img src="${i.before}"></div>
-<div><img src="${i.after}"></div>
+<div><img src="${i.before}" loading="lazy" decoding="async"></div>
+<div><img src="${i.after}" loading="lazy" decoding="async"></div>
 </div>
 
 <button onclick="toggleReport()">Full Report</button>
@@ -529,6 +540,23 @@ function toggleSection(el){
   // toggle current
   currentSection.classList.toggle('active');
   }
+
+// Smooth image loading (fade + blur remove)
+function handleImageLoad(){
+  document.querySelectorAll('img').forEach(img=>{
+    if(img.complete){
+      img.classList.add('loaded');
+    }else{
+      img.onload = ()=> img.classList.add('loaded');
+    }
+  });
+}
+
+// Run on load + after modal updates
+window.addEventListener('load', handleImageLoad);
+
+const observer = new MutationObserver(handleImageLoad);
+observer.observe(document.body, {childList:true, subtree:true});
   
 </script>
 <a class="whatsapp" 
