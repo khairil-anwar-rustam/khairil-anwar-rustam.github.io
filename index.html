@@ -364,16 +364,48 @@ let swipeIndex = 0;
 let swipeGallery = [];
 
 const cases = [
-{category:'hardware',name:'Server PSU Failure',problem:'Server shutdown',fix:'Replace PSU',solution:'System restored',steps:['Check logs','Replace PSU'],tools:'Multimeter',impact:'Uptime restored',before:'img/b1.jpg',after:'img/a1.jpg'},
-{category:'iot',name:'Smart Irrigation',problem:'Manual watering',fix:'Automation',solution:'Auto irrigation',steps:['Install sensor','Relay setup'],tools:'ESP32',impact:'80% water saved',before:'img/b5.jpg',after:'img/a5.jpg'}
+{
+category:'hardware',
+name:'Server PSU Failure',
+problem:'Server sudden shutdown',
+story:'The server experienced unexpected downtime due to a failing power supply unit. After diagnosis using log checks and hardware testing, the PSU was confirmed faulty and replaced. System was restored successfully with improved stability monitoring added afterward.',
+fix:'Replace PSU',
+solution:'System restored with monitoring improvements',
+steps:[
+'Check system logs for power-related errors',
+'Perform hardware diagnostics',
+'Confirm PSU failure using multimeter',
+'Replace PSU unit',
+'Run stability test after replacement'
+],
+tools:'Multimeter, System Monitoring Tools',
+impact:'Restored uptime and improved system reliability'
+},
+{
+category:'iot',
+name:'Smart Irrigation System',
+problem:'Manual watering process inefficient',
+story:'The irrigation system was fully manual, causing inconsistent watering and wasted resources. An IoT-based automation system was introduced using sensors and relay control, allowing automatic watering based on soil moisture levels.',
+fix:'Automation using IoT sensors',
+solution:'Auto irrigation system deployed',
+steps:[
+'Install soil moisture sensor',
+'Configure ESP32 microcontroller',
+'Setup relay control for water pump',
+'Program automation thresholds',
+'Test system response and calibration'
+],
+tools:'ESP32, Soil Moisture Sensor, Relay Module',
+impact:'Reduced water usage by 80% and improved plant consistency'
+}
 ];
 
 const activities = [
 {
 name:"Audiovisual System Deployment",
-desc:"Class Projector installation",
-story:"Full installation + calibration of projection system.",
-impact:"Improved lecture experience",
+desc:"Installation, configuration, and troubleshooting of classroom AV system",
+story:"Responsible for the full deployment of an audiovisual system for classroom use, including projector installation, signal routing, device configuration, and calibration. Conducted troubleshooting to ensure stable video and audio output, eliminating latency and display issues. System was tested across multiple input sources to ensure compatibility and reliability for daily academic use.",
+impact:"Enhanced classroom multimedia experience and system stability",
 gallery:[
 "Activities/AV/AV_1.jpeg",
 "Activities/AV/AV_2.jpeg",
@@ -456,11 +488,11 @@ document.getElementById('modal').style.display='flex';
 
 document.getElementById('modal-body').innerHTML=`
 <h2>${i.name}</h2>
-<p>${i.problem}</p>
+<p><b>Problem:</b> ${i.problem}</p>
 
-<div class="slider-box">
-<div><img src="${i.before}" loading="lazy" decoding="async"></div>
-<div><img src="${i.after}" loading="lazy" decoding="async"></div>
+<div style="margin-top:10px; line-height:1.6;">
+  <p><b>Story:</b></p>
+  <p>${i.story}</p>
 </div>
 
 <button onclick="toggleReport()">Full Report</button>
