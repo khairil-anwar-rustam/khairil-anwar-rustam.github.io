@@ -372,40 +372,64 @@ let swipeIndex = 0;
 let swipeGallery = [];
 
 const cases = [
+
 {
-category:'hardware',
-name:'Server PSU Failure',
-problem:'Server sudden shutdown',
-story:'The server experienced unexpected downtime due to a failing power supply unit. After diagnosis using log checks and hardware testing, the PSU was confirmed faulty and replaced. System was restored successfully with improved stability monitoring added afterward.',
-fix:'Replace PSU',
-solution:'System restored with monitoring improvements',
+category:'audiovisual',
+name:'Audiovisual Classroom System Deployment',
+problem:'Unstable classroom multimedia system causing display and audio interruptions',
+story:'The classroom audiovisual infrastructure experienced unstable projector signals, inconsistent audio output, and compatibility issues between connected devices. Troubleshooting and deployment work included projector setup, signal routing verification, audio calibration, and system optimization to ensure reliable academic operation.',
+fix:'Full AV deployment and troubleshooting',
+solution:'Stable classroom audiovisual system successfully deployed',
 steps:[
-'Check system logs for power-related errors',
-'Perform hardware diagnostics',
-'Confirm PSU failure using multimeter',
-'Replace PSU unit',
-'Run stability test after replacement'
+'Inspect projector and audio hardware',
+'Verify HDMI and signal routing connections',
+'Configure audiovisual control system',
+'Perform display calibration and audio balancing',
+'Test compatibility across multiple devices',
+'Conduct final stability testing'
 ],
-tools:'Multimeter, System Monitoring Tools',
-impact:'Restored uptime and improved system reliability'
+tools:'Projector System, HDMI Analyzer, Audio Mixer, Signal Tester',
+impact:'Improved classroom multimedia experience and operational stability'
 },
+
 {
-category:'iot',
-name:'Smart Irrigation System',
-problem:'Manual watering process inefficient',
-story:'The irrigation system was fully manual, causing inconsistent watering and wasted resources. An IoT-based automation system was introduced using sensors and relay control, allowing automatic watering based on soil moisture levels.',
-fix:'Automation using IoT sensors',
-solution:'Auto irrigation system deployed',
+category:'security',
+name:'Video Information Security System Troubleshooting',
+problem:'Intermittent connectivity and unstable monitoring system performance',
+story:'The video information security system experienced inconsistent device connectivity and unstable monitoring feeds. Troubleshooting was performed on networking components, signal integrity, device communication, and system performance validation to ensure stable monitoring operation.',
+fix:'System troubleshooting and device validation',
+solution:'Security monitoring system stabilized and optimized',
 steps:[
-'Install soil moisture sensor',
-'Configure ESP32 microcontroller',
-'Setup relay control for water pump',
-'Program automation thresholds',
-'Test system response and calibration'
+'Inspect surveillance hardware and device connections',
+'Test device communication and signal quality',
+'Verify power and network configuration',
+'Perform system diagnostics and monitoring checks',
+'Reconfigure unstable devices',
+'Validate overall system performance'
 ],
-tools:'ESP32, Soil Moisture Sensor, Relay Module',
-impact:'Reduced water usage by 80% and improved plant consistency'
+tools:'Network Tester, CCTV Monitoring System, Power Tester',
+impact:'Enhanced reliability and uptime of security monitoring infrastructure'
+},
+
+{
+category:'network',
+name:'Access Point Point-to-Point Signal Coverage Troubleshooting',
+problem:'Weak wireless bridge signal and unstable long-range connectivity',
+story:'Performed troubleshooting and optimization for Access Point Point-to-Point wireless communication system. Tasks included antenna alignment, signal strength analysis, interference detection, throughput testing, and coverage optimization between remote locations. Real-time monitoring was conducted to stabilize connectivity and minimize packet loss caused by environmental obstruction and frequency interference.',
+fix:'Wireless bridge optimization and signal tuning',
+solution:'Stable long-range wireless communication established',
+steps:[
+'Inspect antenna mounting and alignment',
+'Measure signal strength and link quality',
+'Analyze wireless interference sources',
+'Perform throughput and latency testing',
+'Optimize channel and frequency configuration',
+'Validate long-range connection stability'
+],
+tools:'Wireless Access Point, Signal Analyzer, Network Monitoring Tools',
+impact:'Improved wireless link stability, coverage quality, and network reliability'
 }
+
 ];
 
 const activities = [
