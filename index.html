@@ -255,8 +255,8 @@ button{
 }
 
 .section.active .section-content{
-  max-height:2000px; /* large enough to expand */
-  }
+  max-height:3000px; /* Boosted to fit extra interactive contents */
+}
 
 img{
   opacity:0;
@@ -268,7 +268,105 @@ img.loaded{
   opacity:1;
   filter:blur(0);
 }
-  
+
+/* ===== INTERACTIVE RESUME CUSTOM STYLES ===== */
+.resume-meta {
+  color: var(--muted);
+  font-size: 14px;
+  margin-top: 5px;
+}
+.resume-search-bar {
+  width: 100%;
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  margin: 15px 0;
+  outline: none;
+  transition: 0.3s;
+}
+.resume-search-bar:focus {
+  border-color: var(--accent);
+  background: rgba(255,255,255,0.06);
+}
+.resume-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  overflow-x: auto;
+  padding-bottom: 5px;
+}
+.resume-tab-btn {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: var(--muted);
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: 0.2s;
+  margin-top: 0;
+}
+.resume-tab-btn:hover, .resume-tab-btn.active {
+  background: var(--accent);
+  color: #0b1220;
+  border-color: var(--accent);
+}
+.resume-tab-content {
+  display: none;
+}
+.resume-tab-content.active {
+  display: block;
+  animation: fadeIn 0.4s ease;
+}
+.resume-subheading {
+  color: var(--accent);
+  margin: 15px 0 10px 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+.resume-list {
+  padding-left: 20px;
+  margin-top: 5px;
+}
+.resume-list li {
+  margin-bottom: 8px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.resume-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.experience-item {
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.experience-item:last-child {
+  border-bottom: none;
+}
+.highlight-text {
+  background: rgba(56, 189, 248, 0.25);
+  color: #fff;
+  border-radius: 2px;
+  padding: 0 2px;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (max-width: 600px) {
+  .resume-grid {
+    grid-template-columns: 1fr;
+  }
+}
 </style>
 </head>
 
@@ -278,9 +376,11 @@ img.loaded{
 <div>Portfolio</div>
 <div>
 <a href="#about">About</a>
-<a href="#cases">Cases</a>
+<a href="#resume">Resume</a>
 <a href="#cert">Certs</a>
+<a href="#cases">Cases</a>
 <a href="#social">Activities</a>
+<a href="#apps">Apps</a>
 </div>
 </nav>
 
@@ -297,10 +397,163 @@ img.loaded{
 </div>
 </section>
 
-<section id="cases" class="section">
-<h2 onclick="toggleSection(this)">Case Studies</h2>
+<section id="resume" class="section">
+<h2 onclick="toggleSection(this)">Resume</h2>
 <div class="section-content">
-  <div id="cases-container"></div>
+  
+  <div class="card" style="cursor: default;" id="resumeCard">
+    <!-- Header Block -->
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px;">
+      <div>
+        <h3>KHAIRIL ANWAR BIN RUSTAM</h3>
+        <p class="resume-meta">Seri Iskandar, 32600, Perak, Malaysia | +6013-4570863 | karustam013@gmail.com</p>
+      </div>
+      <a href="Khairil_Anwar_Resume_New.pdf" download="Khairil_Anwar_Resume_New.pdf">
+        <button style="margin-top: 0; background: var(--accent); color: #0b1220; font-weight: 600; border: none;">Download Resume</button>
+      </a>
+    </div>
+
+    <!-- Live Search Filter -->
+    <input type="text" id="resumeSearch" class="resume-search-bar" placeholder="🔍 Cari kemahiran, syarikat atau teknologi... (cth: CCTV, Network, MQA)">
+    
+    <!-- Navigation Tabs -->
+    <div class="resume-tabs">
+      <button class="resume-tab-btn active" onclick="switchResumeTab(event, 'resSummary')">Overview & Competencies</button>
+      <button class="resume-tab-btn" onclick="switchResumeTab(event, 'resExperience')">Experience</button>
+      <button class="resume-tab-btn" onclick="switchResumeTab(event, 'resEducation')">Education & Tools</button>
+    </div>
+
+    <!-- TAB 1: OVERVIEW & COMPETENCIES -->
+    <div id="resSummary" class="resume-tab-content active">
+      <div class="resume-subheading">PROFESSIONAL SUMMARY</div>
+      <p style="font-size: 14px; line-height: 1.6;" class="searchable-text">Versatile and results-driven Professional with over 10 years of dual experience bridging Business Operations/Administration and IT/Technical Infrastructure Management. Proven track record in optimizing campus-wide workflows, coordinating cross-functional departments, managing vendors, and steering recruitment/HR administration. Highly skilled in maintaining critical technical systems, including network configurations and CCTV, while strictly ensuring organizational compliance with ISO 9001, MQA, and MyQuest audit standards.</p>
+      
+      <div class="resume-subheading">CORE COMPETENCIES</div>
+      <div class="resume-grid">
+        <div>
+          <b style="font-size: 14px; color: var(--accent);">Operations & Admin:</b>
+          <ul class="resume-list searchable-text">
+            <li>Workflow Management & SOP Documentation</li>
+            <li>HR Administration & Recruitment Coordination</li>
+            <li>Attendance Tracking & Employee Records</li>
+            <li>ISO 9001, MQA, & MyQuest Audit Prep</li>
+            <li>Facilities, Student Welfare & Hostel Management</li>
+            <li>Vendor & Contractor Coordination</li>
+          </ul>
+        </div>
+        <div>
+          <b style="font-size: 14px; color: var(--accent);">IT & Infrastructure:</b>
+          <ul class="resume-list searchable-text">
+            <li>IT System Support & Technical Troubleshooting</li>
+            <li>Network Configuration & Management (LAN/WAN)</li>
+            <li>Fiber Optic & CCTV Hardware, Software, & PABX Intercom Maintenance</li>
+            <li>Preventive Maintenance & Technical Fault Diagnosis</li>
+            <li>Basic Audio-Visual & Facilities System Support</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: EXPERIENCE -->
+    <div id="resExperience" class="resume-tab-content">
+      <div class="resume-subheading">PROFESSIONAL EXPERIENCE</div>
+      
+      <div class="experience-item">
+        <div style="display: flex; justify-content: space-between; flex-wrap: wrap; font-size: 14px;">
+          <b class="searchable-text">Operations, Administration & IT Executive Coordinator</b>
+          <span style="color: var(--accent);">2019-2026</span>
+        </div>
+        <div style="font-size: 13px; color: var(--muted); margin-bottom: 5px;" class="searchable-text">UNITAR COLLEGE IPOH | Ipoh, Perak</div>
+        <ul class="resume-list searchable-text">
+          <li>Operational Leadership: Coordinated daily operations across campus departments, managed external vendors, and supervised contractors during facility installations and maintenance.</li>
+          <li>HR & Admin Support: Managed recruitment lifecycles (job postings, candidate screening, interview scheduling), facilitated onboarding, monitored attendance, and accurately maintained comprehensive employee and student records.</li>
+          <li>Technical Management: Installed, configured, and troubleshot campus-wide networking equipment, CCTV systems, and PABX intercom systems to ensure 100% operational readiness.</li>
+          <li>Compliance & Audits: Prepared, organized, and maintained meticulous technical, facilities, and operational documentation for successful ISO 9001, MQA, and MyQuest audits.</li>
+          <li>Reporting & Governance: Authored weekly/monthly management reports, recorded meeting minutes, monitored action items, and established operational SOPs.</li>
+          <li>Student Welfare: Served as Hostel Warden, ensuring accommodation safety, discipline, and resolving student complaints effectively.</li>
+        </ul>
+      </div>
+
+      <div class="experience-item">
+        <div style="display: flex; justify-content: space-between; flex-wrap: wrap; font-size: 14px;">
+          <b class="searchable-text">Technician / Project Coordinator</b>
+          <span style="color: var(--accent);">2018-2019</span>
+        </div>
+        <div style="font-size: 13px; color: var(--muted); margin-bottom: 5px;" class="searchable-text">AELV SOLUTIONS SDN. BHD. | Puchong, Selangor</div>
+        <ul class="resume-list searchable-text">
+          <li>Synchronized project schedules, customer communications, technical documentation, and operational reporting.</li>
+          <li>Installed and tested security infrastructure, including CCTV, barrier gates, automatic gates, and access door systems for commercial and residential clients.</li>
+          <li>Performed installation testing, fault resolution, and maintained high customer service standards.</li>
+        </ul>
+      </div>
+
+      <div class="experience-item">
+        <div style="display: flex; justify-content: space-between; flex-wrap: wrap; font-size: 14px;">
+          <b class="searchable-text">Fiber Installer / Operations Assistant</b>
+          <span style="color: var(--accent);">2018</span>
+        </div>
+        <div style="font-size: 13px; color: var(--muted); margin-bottom: 5px;" class="searchable-text">B-BAND COMMUNICATIONS (MAXIS) | Shah Alam, Selangor</div>
+        <ul class="resume-list searchable-text">
+          <li>Streamlined fiber optic installation schedules, managed customer expectations, and generated service activation documentation.</li>
+          <li>Installed fiber optic cabling, set up internet access devices, and performed troubleshooting to ensure service activation completion.</li>
+        </ul>
+      </div>
+
+      <div class="experience-item">
+        <div style="display: flex; justify-content: space-between; flex-wrap: wrap; font-size: 14px;">
+          <b class="searchable-text">Fiber Installer / Logistics Coordinator</b>
+          <span style="color: var(--accent);">2017-2018</span>
+        </div>
+        <div style="font-size: 13px; color: var(--muted); margin-bottom: 5px;" class="searchable-text">CENGAL HARUM (UNIFI) | Puchong, Selangor</div>
+        <ul class="resume-list searchable-text">
+          <li>Scheduled customer appointments, supervised cabling activities, and completed strict quality and connectivity performance reporting.</li>
+          <li>Installed new fiber optic cables and internet connection devices while managing specific customer service requirements.</li>
+        </ul>
+      </div>
+
+      <div class="experience-item">
+        <div style="display: flex; justify-content: space-between; flex-wrap: wrap; font-size: 14px;">
+          <b class="searchable-text">Technician / Operations Support</b>
+          <span style="color: var(--accent);">2016-2017</span>
+        </div>
+        <div style="font-size: 13px; color: var(--muted); margin-bottom: 5px;" class="searchable-text">ITS SDN. BHD. | Kuala Lumpur</div>
+        <ul class="resume-list searchable-text">
+          <li>Supported daily field operations, handled technical scheduling, and provided on-site hardware and internet connectivity support for clients.</li>
+          <li>Communicated with and managed customers according to service requirements and provided basic on-site technical support.</li>
+        </ul>
+      </div>
+
+      <div class="experience-item">
+        <div style="display: flex; justify-content: space-between; flex-wrap: wrap; font-size: 14px;">
+          <b class="searchable-text">Junior Executive / IT Assistant</b>
+          <span style="color: var(--accent);">2014-2016</span>
+        </div>
+        <div style="font-size: 13px; color: var(--muted); margin-bottom: 5px;" class="searchable-text">COSMOPOINT COLLEGE | Ipoh, Perak</div>
+        <ul class="resume-list searchable-text">
+          <li>Assisted with administrative documentation, generated operational reports, and managed network connectivity across campus premises.</li>
+          <li>Supported campus IT systems, computer peripherals, and IT hardware while handling basic troubleshooting and maintenance.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- TAB 3: EDUCATION & TOOLS -->
+    <div id="resEducation" class="resume-tab-content">
+      <div class="resume-subheading">EDUCATION</div>
+      <ul class="resume-list searchable-text">
+        <li><b>Master of Information Technology</b> - UNITAR International University <span style="color: var(--muted); font-size: 13px;">(2025-2026)</span></li>
+        <li><b>Bachelor of Information Technology (Hons)</b> - UNITAR International University <span style="color: var(--muted); font-size: 13px;">(2022-2024)</span></li>
+        <li><b>Diploma in Information Technology</b> - Cosmopoint College, Ipoh, MY <span style="color: var(--muted); font-size: 13px;">(2014-2016)</span></li>
+      </ul>
+
+      <div class="resume-subheading">SYSTEMS, TOOLS & SOFTWARE</div>
+      <ul class="resume-list searchable-text">
+        <li><b>Productivity & Admin:</b> Microsoft Word, Excel, PowerPoint, Google Sheets, Attendance Tracking Systems, Reporting Systems.</li>
+        <li><b>Technical & OS:</b> Windows OS Administration, Network Configuration Tools (LAN/WAN), Technical Fault Diagnosis, System Documentation Tools.</li>
+      </ul>
+    </div>
+
+  </div>
+
 </div>
 </section>
 
@@ -313,9 +566,16 @@ img.loaded{
 <div class="cert-card" onclick="openCert('Certs/Master.jpg')">Master Degree</div>
 <div class="cert-card" onclick="openCert('Certs/MBOT-QT.jpg')">MBOT Qualified Technician</div>
 <div class="cert-card" onclick="openCert('Certs/MBOT-GT.jpg')">MBOT Graduate Technologist</div>
-<div class="cert-card" onclick="openCert('Certs/TNB-NT.jpg')">TNB Network Technologies</div>
+<div class="cert-card" onclick="openCert('TNB-NT.jpg')">TNB Network Technologies</div>
 <div class="cert-card" onclick="openCert('Certs/HCENT.jpg')">HCENT Certification</div>
 
+</div>
+</section>
+
+<section id="cases" class="section">
+<h2 onclick="toggleSection(this)">Case Studies</h2>
+<div class="section-content">
+  <div id="cases-container"></div>
 </div>
 </section>
 
@@ -602,6 +862,53 @@ else prevSwipe();
 };
 }
 
+/* ===== INTERACTIVE RESUME JAVASCRIPT FUNCTIONS ===== */
+function switchResumeTab(evt, tabId) {
+  const contents = document.querySelectorAll('.resume-tab-content');
+  contents.forEach(content => content.classList.remove('active'));
+  
+  const tabs = document.querySelectorAll('.resume-tab-btn');
+  tabs.forEach(tab => tab.classList.remove('active'));
+  
+  document.getElementById(tabId).classList.add('active');
+  evt.currentTarget.classList.add('active');
+}
+
+// Store original resume text states to prevent broken layout during filters
+const baseTextNodes = [];
+window.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.searchable-text').forEach((el, idx) => {
+    baseTextNodes.push({ element: el, html: el.innerHTML });
+  });
+});
+
+document.getElementById('resumeSearch').addEventListener('input', function(e) {
+  const query = e.target.value.toLowerCase().trim();
+  
+  baseTextNodes.forEach(node => {
+    if (!query) {
+      node.element.innerHTML = node.html;
+      return;
+    }
+    
+    // Simple dynamic text extraction and regex highlight injector
+    let innerHTML = node.html;
+    const regex = new RegExp(`(${query.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')})`, 'gi');
+    
+    // Safe text match without breaking tag properties
+    if (node.element.textContent.toLowerCase().includes(query)) {
+      // Temporary basic HTML strings match
+      const plainText = node.element.textContent;
+      if(plainText.toLowerCase().includes(query)) {
+         // Fallback layout friendly highlighter approach 
+         node.element.innerHTML = node.html.replace(regex, '<span class="highlight-text">$1</span>');
+      }
+    } else {
+      node.element.innerHTML = node.html;
+    }
+  });
+});
+
 function nextSwipe(){
 if(swipeIndex < swipeGallery.length - 1){
 swipeIndex++;
@@ -681,4 +988,4 @@ observer.observe(document.body, {childList:true, subtree:true});
 💬
   </a>
 </body>
-  </html>
+</html>
