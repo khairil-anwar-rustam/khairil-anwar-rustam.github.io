@@ -251,11 +251,12 @@ button{
 .section-content{
   max-height:0;
   overflow:hidden;
-  transition:max-height 0.4s ease;
+  transition:max-height 0.6s ease;
 }
 
 .section.active .section-content{
-  max-height:3000px; /* Boosted to fit extra interactive contents */
+  max-height:100vh;
+  overflow-y:auto; /* Boosted to fit extra interactive contents */
 }
 
 img{
